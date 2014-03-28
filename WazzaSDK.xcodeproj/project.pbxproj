@@ -22,6 +22,16 @@
 		460F8E4F18BD5AFC003CCC12 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E4E18BD5AFC003CCC12 /* Currency.m */; };
 		460F8E5218BD5B14003CCC12 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E5118BD5B14003CCC12 /* NetworkService.m */; };
 		460F8E5518BD5B7F003CCC12 /* LocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E5418BD5B7F003CCC12 /* LocationInfo.m */; };
+		460F8E7B18BD5F1B003CCC12 /* Purchase.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E4718BD5AEB003CCC12 /* Purchase.h */; };
+		460F8E8418BD5F5A003CCC12 /* LocationInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E5318BD5B7F003CCC12 /* LocationInfo.h */; };
+		460F8E8518BD5F5E003CCC12 /* NetworkService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E5018BD5B14003CCC12 /* NetworkService.h */; };
+		460F8E9C18BE45C3003CCC12 /* SecurityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E9B18BE45C3003CCC12 /* SecurityService.m */; };
+		465DC93518C0A8D6000B91D7 /* PersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC93418C0A8D6000B91D7 /* PersistenceService.m */; };
+		465DC98518C0E53B000B91D7 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98418C0E53B000B91D7 /* Item.m */; };
+		465DC98818C0F75A000B91D7 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98718C0F75A000B91D7 /* ImageInfo.m */; };
+		465DC98B18C0FA25000B91D7 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98A18C0FA25000B91D7 /* Currency.m */; };
+		465DC98E18C48EB0000B91D7 /* HttpCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98D18C48EB0000B91D7 /* HttpCodes.m */; };
+		4697FE5D18CE43400086FE28 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4697FE5C18CE43400086FE28 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +81,20 @@
 		460F8E5118BD5B14003CCC12 /* NetworkService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkService.m; sourceTree = "<group>"; };
 		460F8E5318BD5B7F003CCC12 /* LocationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationInfo.h; sourceTree = "<group>"; };
 		460F8E5418BD5B7F003CCC12 /* LocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationInfo.m; sourceTree = "<group>"; };
+		460F8E9A18BE45C3003CCC12 /* SecurityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecurityService.h; sourceTree = "<group>"; };
+		460F8E9B18BE45C3003CCC12 /* SecurityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecurityService.m; sourceTree = "<group>"; };
+		465DC93318C0A8D6000B91D7 /* PersistenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceService.h; sourceTree = "<group>"; };
+		465DC93418C0A8D6000B91D7 /* PersistenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceService.m; sourceTree = "<group>"; };
+		465DC93D18C0BF04000B91D7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		465DC98318C0E53B000B91D7 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		465DC98418C0E53B000B91D7 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		465DC98618C0F75A000B91D7 /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
+		465DC98718C0F75A000B91D7 /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
+		465DC98918C0FA25000B91D7 /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
+		465DC98A18C0FA25000B91D7 /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
+		465DC98C18C48EB0000B91D7 /* HttpCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpCodes.h; sourceTree = "<group>"; };
+		465DC98D18C48EB0000B91D7 /* HttpCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpCodes.m; sourceTree = "<group>"; };
+		4697FE5C18CE43400086FE28 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4697FE5D18CE43400086FE28 /* StoreKit.framework in Frameworks */,
 				460F8E1D18BD5A3E003CCC12 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +143,7 @@
 		460F8E1B18BD5A3E003CCC12 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4697FE5C18CE43400086FE28 /* StoreKit.framework */,
 				460F8E1C18BD5A3E003CCC12 /* Foundation.framework */,
 				460F8E2A18BD5A3E003CCC12 /* XCTest.framework */,
 				460F8E2D18BD5A3E003CCC12 /* UIKit.framework */,

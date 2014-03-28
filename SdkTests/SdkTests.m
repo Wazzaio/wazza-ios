@@ -28,7 +28,24 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    XCTAssertTrue(self.sdk != nil);
+}
+
+-(void)testPurchase {
+    NSArray *items = [self.sdk getItems:2];
+    if (items == nil) {
+        XCTFail("list of items is null");
+    }
+
+    if ([items count] > 0) {
+        Item *item = items[0];
+        if (item == nil) {
+            XCTFail("Item is null");
+        }
+        XCTAssertTrue([self.sdk makePurchase:item] == YES);
+    }
+
+    XCTAssertTrue(1 == 1);
 }
 
 @end
