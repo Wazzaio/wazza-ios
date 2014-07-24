@@ -19,9 +19,9 @@
                         :(NSString *)applicationName
                         :(NSString *)secretKey;
 
--(void)allowGeoLocation;
-
 #pragma Session functions
+
+-(void)newSession;
 
 // -(void)resumeSession;
 
@@ -29,12 +29,16 @@
 
 #pragma Items and purchases
 
--(void)getRecommendedItems:(int)limit;
+//-(void)getRecommendedItems:(int)limit;
 
--(Item *)getItem:(NSString *)name;
-
--(NSArray *)getItems:(int)limit;
+//-(Item *)getItem:(NSString *)name;
+//
+//-(NSArray *)getItems:(int)limit;
 
 -(void)makePurchase:(Item *)item;
+
+#pragma Other stuff
+
+-(void)allowGeoLocation;
 
 @end

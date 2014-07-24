@@ -17,6 +17,7 @@
 @property(nonatomic, strong) NSString *applicationName;
 @property(nonatomic, strong) NSString *companyName;
 @property(nonatomic) NSDate *startTime;
+@property(nonatomic) NSDate *endTime;
 @property(nonatomic, strong) LocationInfo *location;
 @property(nonatomic, strong) DeviceInfo *device;
 
@@ -28,5 +29,7 @@
 -(NSString *)sessionHash;
 
 -(void)updateLocationInfo:(double)latitude :(double)longitude;
+
+-(void)setEndDate;
 
 @end

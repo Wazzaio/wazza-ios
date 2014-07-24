@@ -10,20 +10,32 @@
 #import "Item.h"
 #import "SessionInfo.h"
 
+#define SESSION_INFO @"session_info"
+
 @interface PersistenceService : NSObject
 
 -(id)initPersistence;
 
--(void)saveSessionInfo:(SessionInfo *)info;
+//-(void)saveSessionInfo:(SessionInfo *)info;
+//
+//-(SessionInfo *)getSessionInfo;
+//
+//-(void)clearSession;
 
--(SessionInfo *)getSessionInfo;
+-(void)storeContent:(id)content :(NSString *)key;
 
--(void)createItemFromJson:(NSDictionary *)json;
+-(id)getContent:(NSString *)key;
 
--(Item *)getItem:(NSString *)name;
+-(BOOL)contentExists:(NSString *)key;
 
--(void)removeItem:(NSString *)itemId;
+-(void)clearContent:(NSString *)key;
 
--(NSArray *)getItems:(int)offset;
+//-(void)createItemFromJson:(NSDictionary *)json;
+//
+//-(Item *)getItem:(NSString *)name;
+//
+//-(void)removeItem:(NSString *)itemId;
+//
+//-(NSArray *)getItems:(int)offset;
 
 @end

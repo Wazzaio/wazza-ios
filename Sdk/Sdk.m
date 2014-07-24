@@ -33,7 +33,7 @@
 #define ENDPOINT_DETAILS @"item/"
 #define ENDPOINT_PURCHASE @"purchase"
 
-@interface SDK() <CLLocationManagerDelegate, ItemDelegate, PurchaseDelegate>
+@interface SDK() <CLLocationManagerDelegate, PurchaseDelegate>
 
 @property(nonatomic) NSString *companyName;
 @property(nonatomic) NSString *applicationName;
@@ -45,7 +45,6 @@
 @property(nonatomic, strong) CLGeocoder *geocoder;
 @property(nonatomic, strong) LocationInfo *currentLocation;
 @property(nonatomic, strong) PurchaseService *purchaseService;
-@property(nonatomic, strong) ItemService *itemService;
 @property(nonatomic, strong) SessionService *sessionService;
 @property(nonatomic, strong) NSArray *skInfo;
 
@@ -68,10 +67,8 @@
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
-        self.itemService = [[ItemService alloc] initWithAppName:companyName :applicationName];
         self.purchaseService = [[PurchaseService alloc] initWithAppName:companyName :applicationName];
         self.sessionService = [[SessionService alloc] initService:companyName :applicationName];
-        self.itemService.delegate = self;
         self.purchaseService.delegate = self;
         self.currentLocation = nil;
         [self bootstrap];
@@ -105,25 +102,7 @@
     [self.sessionService endSession];
 }
 
-#pragma Items and purchases
-
--(void)getRecommendedItems:(int)limit {
-    [self.itemService getRecommendedItems:limit :
-     ^(NSArray * result) {
-         [self.delegate OnRecommendedItemsResult:result :nil];
-     }:
-     ^(NSError *error) {
-         [self.delegate OnRecommendedItemsResult:nil :error];
-     }];
-}
-
--(Item *)getItem:(NSString *)name {
-    return [self.itemService getItem:name];
-}
-
--(NSArray *)getItems:(int)limit {
-    return[self.itemService getItems:limit];
-}
+#pragma Purchases
 
 -(void)makePurchase:(Item *)item {
 
@@ -203,16 +182,6 @@
         return NO;
     }else{
         return YES;
-    }
-}
-
-#pragma ItemDelegate
-
--(void)onItemFetchComplete:(NSArray *)items :(WazzaError *)error {
-    if (!error) {
-        self.skInfo = items;
-    } else {
-        NSLog(@"ERROR %@", error.errorMessage);
     }
 }
 
