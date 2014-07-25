@@ -15,6 +15,9 @@
 #define URL @"http://localhost:9000/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
 
+#import "Underscore.h"
+#define _ Underscore
+
 @interface SessionService ()
 
 @property(nonatomic, strong) NetworkService *networkService;
@@ -47,7 +50,9 @@
 
 -(void)initSession{
     self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
-    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
+    [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
+    NSLog(@"%@", [self.persistenceService getArrayContent:SESSION_INFO]);
+//    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
 }
 
 //TODO

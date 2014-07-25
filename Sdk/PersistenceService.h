@@ -24,6 +24,10 @@
 
 -(void)storeContent:(id)content :(NSString *)key;
 
+-(NSMutableArray *)getArrayContent:(NSString *)arrayKey;
+
+-(void)addContentToArray:(id)content :(NSString *)arrayKey;
+
 -(id)getContent:(NSString *)key;
 
 -(BOOL)contentExists:(NSString *)key;

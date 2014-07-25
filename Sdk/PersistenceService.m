@@ -13,15 +13,37 @@
 
 -(id)initPersistence {
     self = [super init];
-    if (!self) {
-        return nil;
+    if (self) {
+        if (![self contentExists:SESSION_INFO]) {
+            NSData *sessions = [NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]];
+            [[NSUserDefaults standardUserDefaults] setObject:sessions forKey:SESSION_INFO];
+        }
     }
     return self;
 }
 
 -(void)storeContent:(id)content :(NSString *)key {
+    
     NSData *_savedData = [NSKeyedArchiver archivedDataWithRootObject:content];
     [[NSUserDefaults standardUserDefaults] setObject:_savedData forKey:key];
+}
+
+-(NSMutableArray *)getArrayContent:(NSString *)arrayKey {
+    NSData *array = [[NSUserDefaults standardUserDefaults] objectForKey:arrayKey];
+    if (array) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:array];
+    } else {
+        return nil;
+    }
+}
+
+-(void)addContentToArray:(id)content :(NSString *)arrayKey {
+    NSMutableArray *array = [self getArrayContent:arrayKey];
+    if (array) {
+        [array addObject:content];
+        NSData *updated = [NSKeyedArchiver archivedDataWithRootObject:array];
+        [[NSUserDefaults standardUserDefaults] setObject:updated forKey:arrayKey];
+    }
 }
 
 -(id)getContent:(NSString *)key {
