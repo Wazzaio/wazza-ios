@@ -36,9 +36,8 @@
 - (void)setUp
 {
     [super setUp];
-    self.sdk = [[SDK alloc] initWithCredentials:@"App" :@"d7b7e2f5280e89236ed45474" andLocation:false];
+    self.sdk = [[SDK alloc] initWithCredentials:@"App" :@"companyName" :@"d7b7e2f5280e89236ed45474"];
     self.sdk.delegate = self;
-    self.sem = dispatch_semaphore_create(0);
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -50,29 +49,26 @@
 
 - (void)testSDKBootstrap
 {
+    [self.sdk endSession];
+//    dispatch_semaphore_wait(self.sem, DISPATCH_TIME_FOREVER);
     XCTAssertTrue(self.sdk != nil);
 }
 
--(void)testTerminate {
-    [self.sdk terminate];
-    XCTAssertTrue(1==1);
-}
-
--(void)testMakePurchase {
-    NSArray *items = [self.sdk getItems:1];
-    if (items == nil) {
-        XCTFail("list of items is null");
-    }
-    
-    Item *item = items[0];
-    if (item == nil) {
-        XCTFail("Item is null");
-    }
-    
-    [self.sdk makePurchase:item];
-    dispatch_semaphore_wait(self.sem, DISPATCH_TIME_FOREVER);
-    
-    XCTAssertTrue(self.purchaseTestResult);
-}
+//-(void)testMakePurchase {
+//    NSArray *items = [self.sdk getItems:1];
+//    if (items == nil) {
+//        XCTFail("list of items is null");
+//    }
+//    
+//    Item *item = items[0];
+//    if (item == nil) {
+//        XCTFail("Item is null");
+//    }
+//    
+//    [self.sdk makePurchase:item];
+//    dispatch_semaphore_wait(self.sem, DISPATCH_TIME_FOREVER);
+//    
+//    XCTAssertTrue(self.purchaseTestResult);
+//}
 
 @end

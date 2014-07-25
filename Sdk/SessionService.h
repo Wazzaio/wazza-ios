@@ -15,6 +15,8 @@
 
 -(id)initService:(NSString *)companyName :(NSString *)applicationName;
 
+-(BOOL)anySessionStored;
+
 -(void)initSession;
 
 -(void)resumeSession;

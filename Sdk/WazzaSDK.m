@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Wazza. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
-#import "SDK.h"
+#import "WazzaSDK.h"
 #import "NetworkService.h"
 #import "SecurityService.h"
 #import "PersistenceService.h"
@@ -17,6 +16,7 @@
 #import "LocationInfo.h"
 #import "PurchaseDelegate.h"
 #import "SessionService.h"
+#import "LocationService.h"
 
 #define ITEMS_LIST @"ITEMS LIST"
 #define DETAILS @"DETAIILS"
@@ -33,7 +33,7 @@
 #define ENDPOINT_DETAILS @"item/"
 #define ENDPOINT_PURCHASE @"purchase"
 
-@interface SDK() <CLLocationManagerDelegate, ItemDelegate, PurchaseDelegate>
+@interface WazzaSDK() <PurchaseDelegate>
 
 @property(nonatomic) NSString *companyName;
 @property(nonatomic) NSString *applicationName;
@@ -41,17 +41,14 @@
 @property(nonatomic, strong) NetworkService *networkService;
 @property(nonatomic, strong) SecurityService *securityService;
 @property(nonatomic, strong) PersistenceService *persistenceService;
-@property(nonatomic, strong) CLLocationManager *manager;
-@property(nonatomic, strong) CLGeocoder *geocoder;
-@property(nonatomic, strong) LocationInfo *currentLocation;
 @property(nonatomic, strong) PurchaseService *purchaseService;
-@property(nonatomic, strong) ItemService *itemService;
 @property(nonatomic, strong) SessionService *sessionService;
+@property(nonatomic, strong) LocationService *locationService;
 @property(nonatomic, strong) NSArray *skInfo;
 
 @end
 
-@implementation SDK
+@implementation WazzaSDK
 
 @synthesize delegate;
 
@@ -68,12 +65,10 @@
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
-        self.itemService = [[ItemService alloc] initWithAppName:companyName :applicationName];
         self.purchaseService = [[PurchaseService alloc] initWithAppName:companyName :applicationName];
         self.sessionService = [[SessionService alloc] initService:companyName :applicationName];
-        self.itemService.delegate = self;
         self.purchaseService.delegate = self;
-        self.currentLocation = nil;
+        self.locationService = nil;
         [self bootstrap];
     }
     
@@ -81,13 +76,7 @@
 }
 
 -(void)allowGeoLocation {
-    self.currentLocation = nil;
-    if ([self isLocationServiceAvailable]) {
-        self.manager = [[CLLocationManager alloc] init];
-        self.manager.delegate = self;
-        self.manager.desiredAccuracy = kCLLocationAccuracyBest;
-        [self.manager startUpdatingLocation];
-    }
+    self.locationService = [[LocationService alloc] initService];
 }
 
 #pragma Session functions
@@ -105,25 +94,7 @@
     [self.sessionService endSession];
 }
 
-#pragma Items and purchases
-
--(void)getRecommendedItems:(int)limit {
-    [self.itemService getRecommendedItems:limit :
-     ^(NSArray * result) {
-         [self.delegate OnRecommendedItemsResult:result :nil];
-     }:
-     ^(NSError *error) {
-         [self.delegate OnRecommendedItemsResult:nil :error];
-     }];
-}
-
--(Item *)getItem:(NSString *)name {
-    return [self.itemService getItem:name];
-}
-
--(NSArray *)getItems:(int)limit {
-    return[self.itemService getItems:limit];
-}
+#pragma Purchases
 
 -(void)makePurchase:(Item *)item {
 
@@ -175,45 +146,6 @@
 
 -(void)bootstrap {
     [self newSession];
-}
-
-#pragma mark LocationManager
-
--(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"Cannot get location: %@", error);
-}
-
--(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-
-    CLLocation *loc = newLocation;
-    
-    if (loc != nil) {
-        NSNumber *latitude = [[NSNumber alloc] initWithDouble:loc.coordinate.latitude];
-        NSNumber *longitude = [[NSNumber alloc] initWithDouble:loc.coordinate.longitude];
-        self.currentLocation = [[LocationInfo alloc] initWithLocationData:[latitude doubleValue] :[longitude doubleValue]];
-    }
-    
-}
-
--(BOOL)isLocationServiceAvailable
-{
-    if([CLLocationManager locationServicesEnabled]==NO ||
-       [CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied ||
-       [CLLocationManager authorizationStatus]==kCLAuthorizationStatusRestricted){
-        return NO;
-    }else{
-        return YES;
-    }
-}
-
-#pragma ItemDelegate
-
--(void)onItemFetchComplete:(NSArray *)items :(WazzaError *)error {
-    if (!error) {
-        self.skInfo = items;
-    } else {
-        NSLog(@"ERROR %@", error.errorMessage);
-    }
 }
 
 #pragma PurchaseDelegate

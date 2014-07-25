@@ -14,7 +14,6 @@
 
 #define URL @"http://localhost:9000/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
-#define ENDPOINT_SESSION_END @"session/end"
 
 @interface SessionService ()
 
@@ -42,34 +41,18 @@
     return self;
 }
 
+-(BOOL)anySessionStored {
+    return [self.persistenceService contentExists:SESSION_INFO];
+}
+
 -(void)initSession{
     self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, self.companyName, self.applicationName];
-    NSString *content = [self createStringFromJSON:[self.currentSession toJson]];
-    NSDictionary *headers = [self addSecurityInformation:content];
-    NSDictionary *params = nil;
-    NSData *requestData = [self createContentForHttpPost:content :requestUrl];
-    
-    [self.networkService httpRequest:
-                          requestUrl:
-                           HTTP_POST:
-                              params:
-                             headers:
-                         requestData:
-     ^(NSArray *result){
-         // save in local storage
-         [self.persistenceService saveSessionInfo:self.currentSession];
-         NSLog(@"xx");
-     }:
-     ^(NSError *error){
-         NSLog(@"error");
-     }
-     ];
+    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
 }
 
 //TODO
 -(void)resumeSession {
-    SessionInfo *session = [self.persistenceService getSessionInfo];
+    SessionInfo *session = [self.persistenceService getContent:SESSION_INFO];
     NSDate *currentDate = [NSDate date];
     
     NSLog(@"Session %@", session);
@@ -77,13 +60,16 @@
 }
 
 -(void)endSession {
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_END, @"companyName", self.applicationName];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
-    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
     
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:self.currentSession.sessionHash, @"hash", dateString, @"date", nil];
+    
+    SessionInfo *sessionInfo =(SessionInfo *)[self.persistenceService getContent:SESSION_INFO];
+    [sessionInfo setEndDate];
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[sessionInfo toJson], @"session", nil];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
@@ -97,9 +83,10 @@
                          requestData:
      ^(NSArray *result){
          NSLog(@"session update ok");
+         [self.persistenceService clearContent:SESSION_INFO];
      }:
      ^(NSError *error){
-         
+         NSLog(@"%@", error);
      }
      ];
 }

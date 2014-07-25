@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Sdk.xcodeproj">
+      location = "self:WazzaSDK.xcodeproj">
    </FileRef>
 </Workspace>

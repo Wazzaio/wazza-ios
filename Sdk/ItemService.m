@@ -12,7 +12,6 @@
 #import "PersistenceService.h"
 #import "SecurityService.h"
 #import "NetworkService.h"
-#import "Sdk.h"
 #define URL @"http://localhost:9000/api/"
 
 #define ENDPOINT_AUTH @"auth"
@@ -81,29 +80,29 @@
 
 -(void)fetchItems:(int)offset {
     
-    NSString *requestUrl = [NSString stringWithFormat: @"%@%@%@", URL, ENDPOINT_ITEM_DETAILED_LIST, self.applicationName];
-    NSDictionary *headers = [self addSecurityInformation:nil];
-    
-    [self.networkService
-     httpRequest:
-     requestUrl:
-     HTTP_GET:
-     nil:
-     headers:
-     nil:
-     ^(NSArray *result){
-         NSMutableSet *productsId = [[NSMutableSet alloc] init];
-         for (id item in result) {
-             [self.persistenceService createItemFromJson:item];
-             [productsId addObject:[self getItemIdFromJson:item]];
-         }
-         [self checkValidity:productsId];
-     }:
-     ^(NSError *result){
-         WazzaError *error = [[WazzaError alloc] initWithMessage:@"error"]; //TODO
-         [self.delegate onItemFetchComplete:nil :error];
-     }
-     ];
+//    NSString *requestUrl = [NSString stringWithFormat: @"%@%@%@", URL, ENDPOINT_ITEM_DETAILED_LIST, self.applicationName];
+//    NSDictionary *headers = [self addSecurityInformation:nil];
+//    
+//    [self.networkService
+//     httpRequest:
+//     requestUrl:
+//     HTTP_GET:
+//     nil:
+//     headers:
+//     nil:
+//     ^(NSArray *result){
+//         NSMutableSet *productsId = [[NSMutableSet alloc] init];
+//         for (id item in result) {
+//             [self.persistenceService createItemFromJson:item];
+//             [productsId addObject:[self getItemIdFromJson:item]];
+//         }
+//         [self checkValidity:productsId];
+//     }:
+//     ^(NSError *result){
+//         WazzaError *error = [[WazzaError alloc] initWithMessage:@"error"]; //TODO
+//         [self.delegate onItemFetchComplete:nil :error];
+//     }
+//     ];
 }
 
 -(NSString *)getItemIdFromJson:(NSDictionary *) jsonItem {
@@ -112,11 +111,13 @@
 }
 
 -(Item *)getItem:(NSString *)name {
-    return [self.persistenceService getItem:name];
+    return Nil;
+//    return [self.persistenceService getItem:name];
 }
 
 -(NSArray *)getItems:(int)offset {
-    return[self.persistenceService getItems:offset];
+    return Nil;
+//    return[self.persistenceService getItems:offset];
 }
 
 #pragma mark Private Functions
@@ -141,12 +142,12 @@
 
 -(void)productsRequest:(SKProductsRequest *)request
     didReceiveResponse:(SKProductsResponse *)response {
-    
-    for (NSString *invalidIdentifier in response.invalidProductIdentifiers) {
-        [self.persistenceService removeItem:invalidIdentifier];
-    }
-    
-    [self.delegate onItemFetchComplete:response.products :nil];
+//    
+//    for (NSString *invalidIdentifier in response.invalidProductIdentifiers) {
+//        [self.persistenceService removeItem:invalidIdentifier];
+//    }
+//    
+//    [self.delegate onItemFetchComplete:response.products :nil];
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {

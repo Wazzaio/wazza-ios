@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Item.h"
-#import "Sdk.h"
 #import "ItemDelegate.h"
 
 typedef void (^OnSuccess)(NSArray *);
