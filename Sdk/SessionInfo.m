@@ -97,7 +97,7 @@
     self.companyName = [decoder decodeObjectForKey:@"companyName"];
     self.startTime = [decoder decodeObjectForKey:@"startTime"];
     self.endTime = [decoder decodeObjectForKey:@"endTime"];
-//    self.device = [decoder decodeObjectForKey:@"device"];
+    self.device = [decoder decodeObjectForKey:@"device"];
     
     return self;
 }
@@ -109,7 +109,7 @@
     [encoder encodeObject:self.companyName forKey:@"companyName"];
     [encoder encodeObject:self.startTime forKey:@"startTime"];
     [encoder encodeObject:self.endTime forKey:@"endTime"];
-//    [encoder encodeObject:self.device forKey:@"device"];
+    [encoder encodeObject:self.device forKey:@"device"];
 }
 
 @end

@@ -12,7 +12,6 @@
 #import "PersistenceService.h"
 #import "SecurityService.h"
 #import "NetworkService.h"
-#import "Sdk.h"
 #define URL @"http://localhost:9000/api/"
 
 #define ENDPOINT_AUTH @"auth"

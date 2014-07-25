@@ -8,6 +8,7 @@
 
 #import "DeviceInfo.h"
 #import <UIKit/UIDevice.h>
+#include "TargetConditionals.h"
 
 @implementation DeviceInfo
 
@@ -15,9 +16,15 @@
 
     self = [super init];
     if (self) {
-        self.osName = [[UIDevice currentDevice] systemName];
-        self.osVersion = [[UIDevice currentDevice] systemVersion];
-        self.deviceModel = [[UIDevice currentDevice] model];
+        #if TARGET_IPHONE_SIMULATOR
+            self.osName = @"iOs-Simulator-OS";
+            self.osVersion = @"SimulatorVersion";
+            self.deviceModel = @"SimulatorModel";
+        #else
+            self.osName = [[UIDevice currentDevice] systemName];
+            self.osVersion = [[UIDevice currentDevice] systemVersion];
+            self.deviceModel = [[UIDevice currentDevice] model];
+        #endif
     }
     
     return self;
@@ -42,6 +49,26 @@
     [json setObject:self.deviceModel forKey:@"deviceModel"];
     [json setObject:@"iOS" forKey:@"osType"];
     return json;
+}
+
+#pragma mark - NSCoding
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.osName = [decoder decodeObjectForKey:@"osName"];
+    self.osVersion = [decoder decodeObjectForKey:@"osVersion"];
+    self.deviceModel = [decoder decodeObjectForKey:@"model"];
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.osName forKey:@"osName"];
+    [encoder encodeObject:self.osVersion forKey:@"osVersion"];
+    [encoder encodeObject:self.deviceModel forKey:@"model"];
 }
 
 @end

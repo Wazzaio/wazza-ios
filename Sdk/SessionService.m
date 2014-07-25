@@ -14,7 +14,6 @@
 
 #define URL @"http://localhost:9000/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
-#define ENDPOINT_SESSION_END @"session/end"
 
 @interface SessionService ()
 
@@ -61,7 +60,7 @@
 }
 
 -(void)endSession {
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_END, @"companyName", self.applicationName];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];

@@ -11,7 +11,7 @@
 #import "PurchaseInfo.h"
 #import "WazzaSDKDelegate.h"
 
-@interface SDK : NSObject
+@interface WazzaSDK : NSObject
 
 @property (nonatomic, weak) id<WazzaSDKDelegate> delegate;
 

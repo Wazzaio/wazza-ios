@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "46D00A7818E7366C00EF1701"
-               BuildableName = "UniversalLib"
-               BlueprintName = "UniversalLib"
-               ReferencedContainer = "container:Sdk.xcodeproj">
+               BlueprintIdentifier = "460F8E1818BD5A3D003CCC12"
+               BuildableName = "libSdk.a"
+               BlueprintName = "WazzaSDK"
+               ReferencedContainer = "container:WazzaSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,6 +28,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "460F8E2818BD5A3E003CCC12"
+               BuildableName = "SdkTests.xctest"
+               BlueprintName = "WazzaSDKTests"
+               ReferencedContainer = "container:WazzaSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
