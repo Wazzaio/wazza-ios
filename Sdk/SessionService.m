@@ -46,9 +46,12 @@
 }
 
 -(void)initSession{
-    self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
-    [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
-//    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
+    if ([self anySessionStored]) {
+        [self sendSessionDataToServer];
+    } else {
+        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
+        [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
+    }
 }
 
 //TODO
@@ -61,20 +64,24 @@
 }
 
 -(void)endSession {
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
-    
-    
+    [self sendSessionDataToServer];
+}
+
+-(NSString *)getCurrentSessionHash {
+    return self.currentSession.sessionHash;
+}
+
+#pragma mark HTTP private methods
+
+-(void)sendSessionDataToServer {
     NSMutableArray *sessions = [[NSMutableArray alloc] init];
-    
     for(SessionInfo* s in [self.persistenceService getArrayContent:SESSION_INFO]) {
         [s setEndDate];
         [sessions addObject:[s toJson]];
     }
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:sessions, @"session", nil];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
@@ -95,12 +102,6 @@
      }
      ];
 }
-
--(NSString *)getCurrentSessionHash {
-    return self.currentSession.sessionHash;
-}
-
-#pragma mark HTTP private methods
 
 -(NSString *)createStringFromJSON:(NSDictionary *)dic {
     NSError *error;
