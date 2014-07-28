@@ -39,11 +39,12 @@
 
 -(void)addContentToArray:(id)content :(NSString *)arrayKey {
     NSMutableArray *array = [self getArrayContent:arrayKey];
-    if (array) {
-        [array addObject:content];
-        NSData *updated = [NSKeyedArchiver archivedDataWithRootObject:array];
-        [[NSUserDefaults standardUserDefaults] setObject:updated forKey:arrayKey];
+    if (!array) {
+        array = [[NSMutableArray alloc] init];
     }
+    [array addObject:content];
+    NSData *updated = [NSKeyedArchiver archivedDataWithRootObject:array];
+    [[NSUserDefaults standardUserDefaults] setObject:updated forKey:arrayKey];
 }
 
 -(id)getContent:(NSString *)key {

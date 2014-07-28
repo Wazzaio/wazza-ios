@@ -15,9 +15,6 @@
 #define URL @"http://localhost:9000/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
 
-#import "Underscore.h"
-#define _ Underscore
-
 @interface SessionService ()
 
 @property(nonatomic, strong) NetworkService *networkService;
@@ -51,7 +48,6 @@
 -(void)initSession{
     self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
     [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
-    NSLog(@"%@", [self.persistenceService getArrayContent:SESSION_INFO]);
 //    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
 }
 
@@ -71,10 +67,14 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     
     
-    SessionInfo *sessionInfo =(SessionInfo *)[self.persistenceService getContent:SESSION_INFO];
-    [sessionInfo setEndDate];
+    NSMutableArray *sessions = [[NSMutableArray alloc] init];
     
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[sessionInfo toJson], @"session", nil];
+    for(SessionInfo* s in [self.persistenceService getArrayContent:SESSION_INFO]) {
+        [s setEndDate];
+        [sessions addObject:[s toJson]];
+    }
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:sessions, @"session", nil];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
