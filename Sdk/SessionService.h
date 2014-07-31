@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SessionInfo.h"
+
+#define CURRENT_SESSION @"current_session"
 
 @interface SessionService : NSObject
 
@@ -24,5 +27,7 @@
 -(void)endSession;
 
 -(NSString *)getCurrentSessionHash;
+
+-(SessionInfo *)getCurrentSession;
 
 @end

@@ -18,6 +18,10 @@
             NSData *sessions = [NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]];
             [[NSUserDefaults standardUserDefaults] setObject:sessions forKey:SESSION_INFO];
         }
+        if (![self contentExists:PURCHASE_INFO]) {
+            NSData *purchases = [NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]];
+            [[NSUserDefaults standardUserDefaults] setObject:purchases forKey:SESSION_INFO];
+        }
     }
     return self;
 }
@@ -33,7 +37,7 @@
     if (array) {
         return [NSKeyedUnarchiver unarchiveObjectWithData:array];
     } else {
-        return nil;
+        return NULL;
     }
 }
 
@@ -48,11 +52,24 @@
 }
 
 -(id)getContent:(NSString *)key {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
+    NSUserDefaults *data = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    if (data != NULL) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    } else {
+        return nil;
+    }
 }
 
 -(BOOL)contentExists:(NSString *)key {
-    return [self getContent:key] == nil;
+    BOOL res = false;
+    id content = [self getContent:key];
+    if (content != NULL) {
+        if([(NSMutableArray *)content count] > 0) {
+            res = true;
+        }
+    }
+    
+    return res;
 }
 
 -(void)clearContent:(NSString *)key {

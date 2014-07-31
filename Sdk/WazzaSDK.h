@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Item.h"
 #import "PurchaseInfo.h"
 #import "WazzaSDKDelegate.h"
 
@@ -35,7 +34,7 @@
 //
 //-(NSArray *)getItems:(int)limit;
 
--(void)makePurchase:(Item *)item;
+-(void)makePurchase:(NSString *)item;
 
 #pragma Other stuff
 

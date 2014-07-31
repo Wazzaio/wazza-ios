@@ -11,6 +11,7 @@
 #import "SessionInfo.h"
 
 #define SESSION_INFO @"session_info"
+#define PURCHASE_INFO @"purchase_info"
 
 @interface PersistenceService : NSObject
 

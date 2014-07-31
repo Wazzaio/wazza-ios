@@ -12,7 +12,7 @@
 #import "SecurityService.h"
 #import "PersistenceService.h"
 
-#define URL @"http://localhost:9000/api/"
+#define URL @"http://wazza-api.cloudapp.net/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
 
 @interface SessionService ()
@@ -51,6 +51,7 @@
     } else {
         self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
         [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
+        [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
     }
 }
 
@@ -71,11 +72,27 @@
     return self.currentSession.sessionHash;
 }
 
+-(SessionInfo *)getCurrentSession {
+    return (SessionInfo *)[self.persistenceService getContent:CURRENT_SESSION];
+}
+
 #pragma mark HTTP private methods
+
+-(int)addPurchasesToCurrentSession {
+    NSMutableArray *purchases = [self.persistenceService getArrayContent:PURCHASE_INFO];
+    if (purchases != NULL) {
+        self.currentSession.purchases = purchases;
+        return (int)[purchases count];
+    } else return  -1;
+}
 
 -(void)sendSessionDataToServer {
     NSMutableArray *sessions = [[NSMutableArray alloc] init];
-    for(SessionInfo* s in [self.persistenceService getArrayContent:SESSION_INFO]) {
+    NSMutableArray *_saved = [self.persistenceService getArrayContent:SESSION_INFO];
+    for(__strong SessionInfo* s in _saved) {
+        if ([self.currentSession.startTime compare:s.startTime] == NSOrderedSame) {
+            s = ([self addPurchasesToCurrentSession] > 0)? self.currentSession : s;
+        }
         [s setEndDate];
         [sessions addObject:[s toJson]];
     }
