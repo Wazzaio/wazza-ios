@@ -113,6 +113,8 @@
      ^(NSArray *result){
          NSLog(@"session update ok");
          [self.persistenceService clearContent:SESSION_INFO];
+         [self.persistenceService clearContent:CURRENT_SESSION];
+         [self.persistenceService clearContent:PURCHASE_INFO];
      }:
      ^(NSError *error){
          NSLog(@"%@", error);
