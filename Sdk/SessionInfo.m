@@ -32,9 +32,14 @@
         self.location = nil;
         self.device = [[DeviceInfo alloc] initDeviceInfo];
         self.securityService = [[SecurityService alloc] init];
+        self.purchases = [[NSMutableArray alloc] init];
     }
     
     return self;
+}
+
+-(void)addPurchaseId:(NSString *)pId {
+    [self.purchases addObject:pId];
 }
 
 -(void)updateLocationInfo:(double)latitude :(double)longitude {
@@ -75,6 +80,8 @@
     if (self.device != nil) {
         [json setObject:[self.device toJson] forKey:@"deviceInfo"];
     }
+    
+    ([self.purchases count] > 0) ? [json setObject:self.purchases forKey:@"purchases"] : [json setObject:@[] forKey:@"purchases"];
     
     return json;
 }

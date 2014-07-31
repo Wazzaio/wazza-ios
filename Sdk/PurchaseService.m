@@ -11,12 +11,14 @@
 #import <StoreKit/StoreKit.h>
 #import "WazzaError.h"
 #import "PurchaseInfo.h"
+#import "PersistenceService.h"
 
-@interface PurchaseService() <SKPaymentTransactionObserver>
+@interface PurchaseService() <SKPaymentTransactionObserver, SKProductsRequestDelegate>
 
 @property(nonatomic, strong) SKProductsRequest *productRequest;
 @property(nonatomic, strong) ItemService *itemService;
 @property(nonatomic, strong) NSMutableArray *items;
+@property(nonatomic, strong) PersistenceService *persistenceService;
 
 @end
 
@@ -29,6 +31,7 @@
     if (self) {
         self.itemService = [[ItemService alloc] initWithAppName:companyName :appName];
         self.items = [[NSMutableArray alloc] init];
+        self.persistenceService = [[PersistenceService alloc] initPersistence];
     }
     return self;
 }
@@ -37,20 +40,49 @@
     return [SKPaymentQueue canMakePayments];
 }
 
--(void)purchaseItem:(SKProduct *)item {
-    if ([self canMakePurchase] && item != nil) {
-        SKPayment *payment = [SKPayment paymentWithProduct:item];
-        [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-        [[SKPaymentQueue defaultQueue] addPayment:payment];
-        [self.items addObject:item];
-        
+-(void)purchaseItem:(NSString *)item {
+
+    if ([SKPaymentQueue canMakePayments]) {
+        SKProductsRequest *productRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects:item, nil]];
+        productRequest.delegate = self;
+        [productRequest start];
     } else {
-        NSString *errorMsg = [[NSString alloc] initWithFormat:@"%@",
-                              (item == nil ?
-                               @"Item is null" :
-                               ([self canMakePurchase] ? nil: @"Purchases disabled"))];
+        NSString *errorMsg = [[NSString alloc] initWithFormat:@"%@",@"Purchases disabled"];
         WazzaError *error = [[WazzaError alloc] initWithMessage:errorMsg];
         [self.delegate onPurchaseFailure:error];
+    }
+}
+
+-(void)executePaymentRequest:(SKProduct *)item {
+    NSLog(@"ITEM DETAILS %@ | %@", item.localizedTitle, item.price);
+    SKPayment *payment = [SKPayment paymentWithProduct:item];
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+}
+
+#pragma Products Request Delegate
+
+-(void)productsRequest:(SKProductsRequest *)request
+    didReceiveResponse:(SKProductsResponse *)response {
+    
+    NSArray *products = response.products;
+    NSArray *invalid = response.invalidProductIdentifiers;
+    
+    if (invalid.count > 0) {
+        NSString *errorMsg = [[NSString alloc] initWithFormat:@"%@",@"request item is invalid"];
+        WazzaError *error = [[WazzaError alloc] initWithMessage:errorMsg];
+        [self.delegate onPurchaseFailure:error];
+        return;
+    }
+    
+    if (products.count > 0) {
+        [self executePaymentRequest:products[0]];
+        return;
+    } else {
+        NSString *errorMsg = [[NSString alloc] initWithFormat:@"%@",@"No product found"];
+        WazzaError *error = [[WazzaError alloc] initWithMessage:errorMsg];
+        [self.delegate onPurchaseFailure:error];
+        return;
     }
 }
 
@@ -67,6 +99,7 @@
         }
     }
     
+    [self.persistenceService addContentToArray:transaction.payment.productIdentifier :PURCHASE_INFO];
     [self.delegate onPurchaseSuccess:
      [[PurchaseInfo alloc] initFromTransaction:transaction appName:self.itemService.applicationName itemPrice:price]
      ];

@@ -20,9 +20,12 @@
 @property(nonatomic) NSDate *endTime;
 @property(nonatomic, strong) LocationInfo *location;
 @property(nonatomic, strong) DeviceInfo *device;
+@property(nonatomic, strong) NSMutableArray *purchases;
 
 -(id)initSessionInfo:(NSString *)appName
                     :(NSString *)companyName;
+
+-(void)addPurchaseId:(NSString *)pId;
 
 -(NSDictionary *)toJson;
 

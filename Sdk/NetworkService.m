@@ -9,7 +9,7 @@
 #import "NetworkService.h"
 #import "HttpCodes.h"
 
-#define URL @"http://localhost:9000/api/"
+#define URL @"http://wazza-api.cloudapp.net/api/"
 
 @implementation NetworkService
 

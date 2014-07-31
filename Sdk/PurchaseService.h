@@ -18,6 +18,6 @@
 
 -(BOOL)canMakePurchase;
 
--(void)purchaseItem:(SKProduct *)item;
+-(void)purchaseItem:(NSString *)itemId;
 
 @end

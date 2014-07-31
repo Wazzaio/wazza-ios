@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "460F8E1818BD5A3D003CCC12"
-               BuildableName = "libSdk.a"
+               BuildableName = "libWazzaSDK.a"
                BlueprintName = "WazzaSDK"
                ReferencedContainer = "container:WazzaSDK.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "460F8E2818BD5A3E003CCC12"
-               BuildableName = "SdkTests.xctest"
+               BuildableName = "WazzaSDKTests.xctest"
                BlueprintName = "WazzaSDKTests"
                ReferencedContainer = "container:WazzaSDK.xcodeproj">
             </BuildableReference>

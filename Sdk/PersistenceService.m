@@ -13,23 +13,63 @@
 
 -(id)initPersistence {
     self = [super init];
-    if (!self) {
-        return nil;
+    if (self) {
+        if (![self contentExists:SESSION_INFO]) {
+            NSData *sessions = [NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]];
+            [[NSUserDefaults standardUserDefaults] setObject:sessions forKey:SESSION_INFO];
+        }
+        if (![self contentExists:PURCHASE_INFO]) {
+            NSData *purchases = [NSKeyedArchiver archivedDataWithRootObject:[[NSMutableArray alloc] init]];
+            [[NSUserDefaults standardUserDefaults] setObject:purchases forKey:SESSION_INFO];
+        }
     }
     return self;
 }
 
 -(void)storeContent:(id)content :(NSString *)key {
+    
     NSData *_savedData = [NSKeyedArchiver archivedDataWithRootObject:content];
     [[NSUserDefaults standardUserDefaults] setObject:_savedData forKey:key];
 }
 
+-(NSMutableArray *)getArrayContent:(NSString *)arrayKey {
+    NSData *array = [[NSUserDefaults standardUserDefaults] objectForKey:arrayKey];
+    if (array) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:array];
+    } else {
+        return NULL;
+    }
+}
+
+-(void)addContentToArray:(id)content :(NSString *)arrayKey {
+    NSMutableArray *array = [self getArrayContent:arrayKey];
+    if (!array) {
+        array = [[NSMutableArray alloc] init];
+    }
+    [array addObject:content];
+    NSData *updated = [NSKeyedArchiver archivedDataWithRootObject:array];
+    [[NSUserDefaults standardUserDefaults] setObject:updated forKey:arrayKey];
+}
+
 -(id)getContent:(NSString *)key {
-    return [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:key]];
+    NSUserDefaults *data = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+    if (data != NULL) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    } else {
+        return nil;
+    }
 }
 
 -(BOOL)contentExists:(NSString *)key {
-    return [self getContent:key] == nil;
+    BOOL res = false;
+    id content = [self getContent:key];
+    if (content != NULL) {
+        if([(NSMutableArray *)content count] > 0) {
+            res = true;
+        }
+    }
+    
+    return res;
 }
 
 -(void)clearContent:(NSString *)key {

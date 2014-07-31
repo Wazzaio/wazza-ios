@@ -22,7 +22,7 @@
 #define DETAILS @"DETAIILS"
 #define PURCHASE @"PURCHASE"
 
-#define URL @"http://localhost:9000/api/"
+#define URL @"http://wazza-api.cloudapp.net/api/"
 #define HTTP_GET @"GET"
 #define HTTP_POST @"POST"
 
@@ -96,17 +96,17 @@
 
 #pragma Purchases
 
--(void)makePurchase:(Item *)item {
+-(void)makePurchase:(NSString *)item {
 
-    SKProduct *i = nil;
-    for (SKProduct *p in self.skInfo) {
-        if (p.productIdentifier == item._id) {
-            i = p;
-            break;
-        }
-    }
+//    SKProduct *i = nil;
+//    for (SKProduct *p in self.skInfo) {
+//        if (p.productIdentifier == item._id) {
+//            i = p;
+//            break;
+//        }
+//    }
     
-    [self.purchaseService purchaseItem:i];
+    [self.purchaseService purchaseItem:item];
 }
 
 #pragma mark HTTP private methods

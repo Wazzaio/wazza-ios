@@ -12,7 +12,7 @@
 #import "SecurityService.h"
 #import "PersistenceService.h"
 
-#define URL @"http://localhost:9000/api/"
+#define URL @"http://wazza-api.cloudapp.net/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
 
 @interface SessionService ()
@@ -46,8 +46,13 @@
 }
 
 -(void)initSession{
-    self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
-    [self.persistenceService storeContent: self.currentSession :SESSION_INFO];
+    if ([self anySessionStored]) {
+        [self sendSessionDataToServer];
+    } else {
+        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
+        [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
+        [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
+    }
 }
 
 //TODO
@@ -60,16 +65,40 @@
 }
 
 -(void)endSession {
+    [self sendSessionDataToServer];
+}
+
+-(NSString *)getCurrentSessionHash {
+    return self.currentSession.sessionHash;
+}
+
+-(SessionInfo *)getCurrentSession {
+    return (SessionInfo *)[self.persistenceService getContent:CURRENT_SESSION];
+}
+
+#pragma mark HTTP private methods
+
+-(int)addPurchasesToCurrentSession {
+    NSMutableArray *purchases = [self.persistenceService getArrayContent:PURCHASE_INFO];
+    if (purchases != NULL) {
+        self.currentSession.purchases = purchases;
+        return (int)[purchases count];
+    } else return  -1;
+}
+
+-(void)sendSessionDataToServer {
+    NSMutableArray *sessions = [[NSMutableArray alloc] init];
+    NSMutableArray *_saved = [self.persistenceService getArrayContent:SESSION_INFO];
+    for(__strong SessionInfo* s in _saved) {
+        if ([self.currentSession.startTime compare:s.startTime] == NSOrderedSame) {
+            s = ([self addPurchasesToCurrentSession] > 0)? self.currentSession : s;
+        }
+        [s setEndDate];
+        [sessions addObject:[s toJson]];
+    }
+    
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:sessions, @"session", nil];
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
-    
-    
-    SessionInfo *sessionInfo =(SessionInfo *)[self.persistenceService getContent:SESSION_INFO];
-    [sessionInfo setEndDate];
-    
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:[sessionInfo toJson], @"session", nil];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
@@ -84,18 +113,14 @@
      ^(NSArray *result){
          NSLog(@"session update ok");
          [self.persistenceService clearContent:SESSION_INFO];
+         [self.persistenceService clearContent:CURRENT_SESSION];
+         [self.persistenceService clearContent:PURCHASE_INFO];
      }:
      ^(NSError *error){
          NSLog(@"%@", error);
      }
      ];
 }
-
--(NSString *)getCurrentSessionHash {
-    return self.currentSession.sessionHash;
-}
-
-#pragma mark HTTP private methods
 
 -(NSString *)createStringFromJSON:(NSDictionary *)dic {
     NSError *error;

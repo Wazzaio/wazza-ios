@@ -11,6 +11,7 @@
 #import "SessionInfo.h"
 
 #define SESSION_INFO @"session_info"
+#define PURCHASE_INFO @"purchase_info"
 
 @interface PersistenceService : NSObject
 
@@ -23,6 +24,10 @@
 //-(void)clearSession;
 
 -(void)storeContent:(id)content :(NSString *)key;
+
+-(NSMutableArray *)getArrayContent:(NSString *)arrayKey;
+
+-(void)addContentToArray:(id)content :(NSString *)arrayKey;
 
 -(id)getContent:(NSString *)key;
 

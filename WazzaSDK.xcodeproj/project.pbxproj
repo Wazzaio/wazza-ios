@@ -21,29 +21,19 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		460A01CF18ECDFEF00657CEE /* DeviceInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 464D623C18E9BA3600549CFC /* DeviceInfo.h */; };
-		460A035A18EF248900657CEE /* WazzaSDKDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460A01C218ECDCCC00657CEE /* WazzaSDKDelegate.h */; };
 		460F8E1D18BD5A3E003CCC12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460F8E1C18BD5A3E003CCC12 /* Foundation.framework */; };
-		460F8E2218BD5A3E003CCC12 /* WazzaSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E2118BD5A3E003CCC12 /* WazzaSDK.h */; };
 		460F8E2418BD5A3E003CCC12 /* WazzaSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E2318BD5A3E003CCC12 /* WazzaSDK.m */; };
 		460F8E2B18BD5A3E003CCC12 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460F8E2A18BD5A3E003CCC12 /* XCTest.framework */; };
 		460F8E2C18BD5A3E003CCC12 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460F8E1C18BD5A3E003CCC12 /* Foundation.framework */; };
 		460F8E3118BD5A3E003CCC12 /* libWazzaSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 460F8E1918BD5A3D003CCC12 /* libWazzaSDK.a */; settings = {ATTRIBUTES = (Weak, ); }; };
-		460F8E3718BD5A3E003CCC12 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 460F8E3518BD5A3E003CCC12 /* InfoPlist.strings */; };
 		460F8E3918BD5A3E003CCC12 /* SdkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E3818BD5A3E003CCC12 /* SdkTests.m */; };
 		460F8E4918BD5AEB003CCC12 /* PurchaseInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E4818BD5AEB003CCC12 /* PurchaseInfo.m */; };
 		460F8E5218BD5B14003CCC12 /* NetworkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E5118BD5B14003CCC12 /* NetworkService.m */; };
 		460F8E5518BD5B7F003CCC12 /* LocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E5418BD5B7F003CCC12 /* LocationInfo.m */; };
-		460F8E7B18BD5F1B003CCC12 /* PurchaseInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E4718BD5AEB003CCC12 /* PurchaseInfo.h */; };
-		460F8E8418BD5F5A003CCC12 /* LocationInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E5318BD5B7F003CCC12 /* LocationInfo.h */; };
-		460F8E8518BD5F5E003CCC12 /* NetworkService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E5018BD5B14003CCC12 /* NetworkService.h */; };
 		460F8E9C18BE45C3003CCC12 /* SecurityService.m in Sources */ = {isa = PBXBuildFile; fileRef = 460F8E9B18BE45C3003CCC12 /* SecurityService.m */; };
 		46120F51190B3675009CA751 /* SessionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 46120F50190B3675009CA751 /* SessionService.m */; };
 		46169CEE18E6418F008E745A /* SessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46169CED18E6418F008E745A /* SessionInfo.m */; };
 		46169D2F18E73386008E745A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46169D2E18E73386008E745A /* UIKit.framework */; };
-		464D61C018E7606B00549CFC /* Item.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 465DC98318C0E53B000B91D7 /* Item.h */; };
-		464D61C118E7607100549CFC /* Currency.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 465DC98918C0FA25000B91D7 /* Currency.h */; };
-		464D61C218E7607600549CFC /* ImageInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 465DC98618C0F75A000B91D7 /* ImageInfo.h */; };
 		464D61CC18E760BE00549CFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46169D2E18E73386008E745A /* UIKit.framework */; };
 		464D61CE18E983C200549CFC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464D61CD18E983C200549CFC /* CoreLocation.framework */; };
 		464D623E18E9BA3600549CFC /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D623D18E9BA3600549CFC /* DeviceInfo.m */; };
@@ -57,6 +47,11 @@
 		465DC98818C0F75A000B91D7 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98718C0F75A000B91D7 /* ImageInfo.m */; };
 		465DC98B18C0FA25000B91D7 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98A18C0FA25000B91D7 /* Currency.m */; };
 		465DC98E18C48EB0000B91D7 /* HttpCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98D18C48EB0000B91D7 /* HttpCodes.m */; };
+		CF9DDB5E198702B000AAD524 /* WazzaSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E2118BD5A3E003CCC12 /* WazzaSDK.h */; };
+		CF9DDB5F198702CB00AAD524 /* WazzaSDKDelegate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460A01C218ECDCCC00657CEE /* WazzaSDKDelegate.h */; };
+		CF9DDB60198702E100AAD524 /* PurchaseInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E4718BD5AEB003CCC12 /* PurchaseInfo.h */; };
+		CF9DDB691987032B00AAD524 /* LocationInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E5318BD5B7F003CCC12 /* LocationInfo.h */; };
+		CF9DDB6A1987034F00AAD524 /* DeviceInfo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 464D623C18E9BA3600549CFC /* DeviceInfo.h */; };
 		CFC04BD31982970900916803 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = CFC04BD21982970900916803 /* LocationService.m */; };
 /* End PBXBuildFile section */
 
@@ -71,21 +66,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		460F8E1718BD5A3D003CCC12 /* CopyFiles */ = {
+		CF9DDB5D1987028800AAD524 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				460A035A18EF248900657CEE /* WazzaSDKDelegate.h in CopyFiles */,
-				460A01CF18ECDFEF00657CEE /* DeviceInfo.h in CopyFiles */,
-				464D61C218E7607600549CFC /* ImageInfo.h in CopyFiles */,
-				464D61C118E7607100549CFC /* Currency.h in CopyFiles */,
-				464D61C018E7606B00549CFC /* Item.h in CopyFiles */,
-				460F8E8518BD5F5E003CCC12 /* NetworkService.h in CopyFiles */,
-				460F8E8418BD5F5A003CCC12 /* LocationInfo.h in CopyFiles */,
-				460F8E7B18BD5F1B003CCC12 /* PurchaseInfo.h in CopyFiles */,
-				460F8E2218BD5A3E003CCC12 /* WazzaSDK.h in CopyFiles */,
+				CF9DDB6A1987034F00AAD524 /* DeviceInfo.h in CopyFiles */,
+				CF9DDB691987032B00AAD524 /* LocationInfo.h in CopyFiles */,
+				CF9DDB60198702E100AAD524 /* PurchaseInfo.h in CopyFiles */,
+				CF9DDB5F198702CB00AAD524 /* WazzaSDKDelegate.h in CopyFiles */,
+				CF9DDB5E198702B000AAD524 /* WazzaSDK.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +196,7 @@
 		460F8E1E18BD5A3E003CCC12 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				CF9DDB3E1986B9C500AAD524 /* utils */,
 				460F8E4318BD5A9E003CCC12 /* services */,
 				460F8E4218BD5A98003CCC12 /* models */,
 				460F8E2118BD5A3E003CCC12 /* WazzaSDK.h */,
@@ -352,6 +344,13 @@
 			name = Error;
 			sourceTree = "<group>";
 		};
+		CF9DDB3E1986B9C500AAD524 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		CFC04BD0198296F200916803 /* Location */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +369,7 @@
 			buildPhases = (
 				460F8E1518BD5A3D003CCC12 /* Sources */,
 				460F8E1618BD5A3D003CCC12 /* Frameworks */,
-				460F8E1718BD5A3D003CCC12 /* CopyFiles */,
+				CF9DDB5D1987028800AAD524 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -387,7 +386,6 @@
 			buildPhases = (
 				460F8E2518BD5A3E003CCC12 /* Sources */,
 				460F8E2618BD5A3E003CCC12 /* Frameworks */,
-				460F8E2718BD5A3E003CCC12 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -426,17 +424,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		460F8E2718BD5A3E003CCC12 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				460F8E3718BD5A3E003CCC12 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		46D00A7C18E7369E00EF1701 /* ShellScript */ = {
@@ -591,6 +578,7 @@
 					"$(inherited)",
 				);
 				PRODUCT_NAME = WazzaSDK;
+				SDKROOT = iphoneos7.1;
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s i386";
 			};
@@ -603,14 +591,16 @@
 				DSTROOT = /tmp/Sdk.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sdk/WazzaSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
 				);
 				PRODUCT_NAME = WazzaSDK;
+				SDKROOT = iphoneos7.1;
 				SKIP_INSTALL = YES;
-				VALID_ARCHS = "arm64 armv7 armv7s i386";
-				"VALID_ARCHS[sdk=*]" = "arm64 armv7 armv7s";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				"VALID_ARCHS[sdk=*]" = "arm64 armv7 armv7s i386";
 			};
 			name = Release;
 		};
