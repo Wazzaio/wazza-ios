@@ -22,7 +22,6 @@
 #define DETAILS @"DETAIILS"
 #define PURCHASE @"PURCHASE"
 
-#define URL @"http://wazza-api.cloudapp.net/api/"
 #define HTTP_GET @"GET"
 #define HTTP_POST @"POST"
 

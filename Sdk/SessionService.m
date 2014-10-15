@@ -56,11 +56,11 @@
 
 //TODO
 -(void)resumeSession {
-    SessionInfo *session = [self.persistenceService getContent:SESSION_INFO];
-    NSDate *currentDate = [NSDate date];
-    
-    NSLog(@"Session %@", session);
-    NSLog(@"current date %@", currentDate);
+    [self initSession];
+    /**
+        In the future check if N seconds have passed since the last session took place.
+        For now flushes session's data to server and creates a new one
+    **/
 }
 
 -(void)endSession {
@@ -97,7 +97,7 @@
     }
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:sessions, @"session", nil];
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, @"companyName", self.applicationName];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, self.companyName, self.applicationName];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
