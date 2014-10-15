@@ -9,8 +9,6 @@
 #import "NetworkService.h"
 #import "HttpCodes.h"
 
-#define URL @"http://wazza-api.cloudapp.net/api/"
-
 @implementation NetworkService
 
 -(void)httpRequest:(NSString *)url
@@ -27,11 +25,17 @@
      queue:[NSOperationQueue mainQueue]
      completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
          if (!error) {
-             success([self parseResponse:data :error]);
+             NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+             int httpCode = (int)[httpResponse statusCode];
+             if([HttpCodes isError:httpCode]) {
+                 NSError *err = [NSError errorWithDomain:@"Http code" code:httpCode userInfo:nil];
+                 failure(err);
+             } else {
+                 success([self parseResponse:data :error]);
+             }
          } else {
              failure(error);
          }
-         
      }];
 }
 

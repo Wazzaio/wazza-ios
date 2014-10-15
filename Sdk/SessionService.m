@@ -12,7 +12,6 @@
 #import "SecurityService.h"
 #import "PersistenceService.h"
 
-#define URL @"http://wazza-api.cloudapp.net/api/"
 #define ENDPOINT_SESSION_NEW @"session/new"
 
 @interface SessionService ()
