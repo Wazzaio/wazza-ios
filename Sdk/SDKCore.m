@@ -1,22 +1,12 @@
 //
-//  SDK.m
-//  SDK
+//  SDKCore.m
+//  WazzaSDK
 //
-//  Created by Joao Vasques on 25/02/14.
+//  Created by Joao Luis Vazao Vasques on 16/10/14.
 //  Copyright (c) 2014 Wazza. All rights reserved.
 //
 
-#import "WazzaSDK.h"
-#import "NetworkService.h"
-#import "SecurityService.h"
-#import "PersistenceService.h"
-#import "PurchaseService.h"
-#import "ItemService.h"
-#import "SessionInfo.h"
-#import "LocationInfo.h"
-#import "PurchaseDelegate.h"
-#import "SessionService.h"
-#import "LocationService.h"
+#import "SDKCore.h"
 
 #define ITEMS_LIST @"ITEMS LIST"
 #define DETAILS @"DETAIILS"
@@ -32,29 +22,18 @@
 #define ENDPOINT_DETAILS @"item/"
 #define ENDPOINT_PURCHASE @"purchase"
 
-@interface WazzaSDK() <PurchaseDelegate>
-
-@property(nonatomic) NSString *companyName;
-@property(nonatomic) NSString *applicationName;
-@property(nonatomic) NSString *secret;
-@property(nonatomic, strong) NetworkService *networkService;
-@property(nonatomic, strong) SecurityService *securityService;
-@property(nonatomic, strong) PersistenceService *persistenceService;
-@property(nonatomic, strong) PurchaseService *purchaseService;
-@property(nonatomic, strong) SessionService *sessionService;
-@property(nonatomic, strong) LocationService *locationService;
-@property(nonatomic, strong) NSArray *skInfo;
+@interface SDKCore () <PurchaseDelegate>
 
 @end
 
-@implementation WazzaSDK
+@implementation SDKCore
 
 @synthesize delegate;
 
--(id)initWithCredentials:(NSString *)companyName
-                        :(NSString *)applicationName
-                        :(NSString *)secretKey {
-    
+-(id)initCore:(NSString *)companyName
+             :(NSString *)applicationName
+             :(NSString *)secretKey {
+
     self = [super init];
     
     if(self) {
@@ -74,38 +53,45 @@
     return self;
 }
 
--(void)allowGeoLocation {
-    self.locationService = [[LocationService alloc] initService];
+#pragma mark Init methods
+-(void)bootstrap {
+    [self newSession];
 }
-
-#pragma Session functions
 
 -(void)newSession {
     [self.sessionService initSession];
 }
 
-//TODO: service's function is to be done
 -(void)resumeSession {
-    [self.sessionService resumeSession];
+    [self.sessionService initSession];
 }
 
 -(void)endSession {
     [self.sessionService endSession];
 }
 
-#pragma Purchases
-
 -(void)makePurchase:(NSString *)item {
-
-//    SKProduct *i = nil;
-//    for (SKProduct *p in self.skInfo) {
-//        if (p.productIdentifier == item._id) {
-//            i = p;
-//            break;
-//        }
-//    }
+    
+    //    SKProduct *i = nil;
+    //    for (SKProduct *p in self.skInfo) {
+    //        if (p.productIdentifier == item._id) {
+    //            i = p;
+    //            break;
+    //        }
+    //    }
     
     [self.purchaseService purchaseItem:item];
+}
+
+
+#pragma Other stuff
+
+-(void)allowGeoLocation {
+
+}
+
+-(void)setUserId:(NSString *)userId {
+
 }
 
 #pragma mark HTTP private methods
@@ -134,17 +120,11 @@
 
 -(NSDictionary *)addSecurityInformation:(NSString *)content {
     NSMutableDictionary *securityHeaders = [NSMutableDictionary dictionaryWithObjectsAndKeys:[self applicationName],@"AppName", nil];
-
+    
     if (content) {
         [securityHeaders setValue:[self.securityService hashContent:content] forKey:@"Digest"];
     }
     return securityHeaders;
-}
-
-#pragma mark Init methods
-
--(void)bootstrap {
-    [self newSession];
 }
 
 #pragma PurchaseDelegate
@@ -152,7 +132,7 @@
 -(void)onPurchaseFailure:(WazzaError *)error {
     NSLog(@"received error...");
     NSError *err = nil;
-    [self.delegate PurchaseFailure:err];
+    [self.delegate corePurchaseFailure:err];
 }
 
 
@@ -165,7 +145,7 @@
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
     NSData *requestData = [self createContentForHttpPost:content :requestUrl];
-
+    
     [self.networkService httpRequest:
                           requestUrl:
                            HTTP_POST:
@@ -173,13 +153,14 @@
                              headers:
                          requestData:
      ^(NSArray *result){
-        NSLog(@"PURCHASE SUCCESS! %@", purchaseInfo);
-        [self.delegate purchaseSuccess:purchaseInfo];
+         NSLog(@"PURCHASE SUCCESS! %@", purchaseInfo);
+         [self.delegate corePurchaseSuccess:purchaseInfo];
      }:
      ^(NSError *error){
-        [self.delegate PurchaseFailure:error];
+         [self.delegate corePurchaseFailure:error];
      }
      ];
 }
+
 
 @end

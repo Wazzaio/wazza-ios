@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PurchaseInfo.h"
 
-@protocol WazzaSDKDelegate <NSObject>
+@protocol WazzaDelegate <NSObject>
 
 @required
 -(void)purchaseSuccess:(PurchaseInfo *)info;
