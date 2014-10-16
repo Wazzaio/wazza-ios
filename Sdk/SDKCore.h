@@ -12,7 +12,6 @@
 #import "SecurityService.h"
 #import "PersistenceService.h"
 #import "PurchaseService.h"
-#import "ItemService.h"
 #import "SessionInfo.h"
 #import "LocationInfo.h"
 #import "PurchaseDelegate.h"

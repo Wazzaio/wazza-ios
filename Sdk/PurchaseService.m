@@ -7,7 +7,6 @@
 //
 
 #import "PurchaseService.h"
-#import "ItemService.h"
 #import <StoreKit/StoreKit.h>
 #import "WazzaError.h"
 #import "PurchaseInfo.h"
@@ -16,7 +15,6 @@
 @interface PurchaseService() <SKPaymentTransactionObserver, SKProductsRequestDelegate>
 
 @property(nonatomic, strong) SKProductsRequest *productRequest;
-@property(nonatomic, strong) ItemService *itemService;
 @property(nonatomic, strong) NSMutableArray *items;
 @property(nonatomic, strong) PersistenceService *persistenceService;
 
@@ -29,7 +27,8 @@
 -(id)initWithAppName:(NSString *)companyName :(NSString *)appName {
     self = [super init];
     if (self) {
-        self.itemService = [[ItemService alloc] initWithAppName:companyName :appName];
+        self.companyName = companyName;
+        self.appName = appName;
         self.items = [[NSMutableArray alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
     }
@@ -101,7 +100,7 @@
     
     [self.persistenceService addContentToArray:transaction.payment.productIdentifier :PURCHASE_INFO];
     [self.delegate onPurchaseSuccess:
-     [[PurchaseInfo alloc] initFromTransaction:transaction appName:self.itemService.applicationName itemPrice:price]
+     [[PurchaseInfo alloc] initFromTransaction:transaction appName:self.appName itemPrice:price]
      ];
 }
 

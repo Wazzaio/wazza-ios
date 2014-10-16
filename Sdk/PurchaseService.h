@@ -13,6 +13,8 @@
 @interface PurchaseService : NSObject
 
 @property (nonatomic, weak) id<PurchaseDelegate> delegate;
+@property (nonatomic, strong) NSString *companyName;
+@property (nonatomic, strong) NSString *appName;
 
 -(id)initWithAppName:(NSString *)companyName :(NSString *)appName;
 

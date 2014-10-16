@@ -39,7 +39,6 @@
 		464D623E18E9BA3600549CFC /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 464D623D18E9BA3600549CFC /* DeviceInfo.m */; };
 		464E205C18EC1EDE00C8F075 /* PurchaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 464E205B18EC1EDE00C8F075 /* PurchaseService.m */; };
 		464E205E18EC236E00C8F075 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464E205D18EC236E00C8F075 /* StoreKit.framework */; };
-		464E206318EC5E9300C8F075 /* ItemService.m in Sources */ = {isa = PBXBuildFile; fileRef = 464E206218EC5E9300C8F075 /* ItemService.m */; };
 		464E206418EC697400C8F075 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464E205D18EC236E00C8F075 /* StoreKit.framework */; };
 		464E206918EC735500C8F075 /* WazzaError.m in Sources */ = {isa = PBXBuildFile; fileRef = 464E206818EC735500C8F075 /* WazzaError.m */; };
 		465DC93518C0A8D6000B91D7 /* PersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC93418C0A8D6000B91D7 /* PersistenceService.m */; };
@@ -114,12 +113,9 @@
 		464E205A18EC1EDE00C8F075 /* PurchaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseService.h; sourceTree = "<group>"; };
 		464E205B18EC1EDE00C8F075 /* PurchaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseService.m; sourceTree = "<group>"; };
 		464E205D18EC236E00C8F075 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		464E206118EC5E9300C8F075 /* ItemService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemService.h; sourceTree = "<group>"; };
-		464E206218EC5E9300C8F075 /* ItemService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemService.m; sourceTree = "<group>"; };
 		464E206718EC735500C8F075 /* WazzaError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WazzaError.h; sourceTree = "<group>"; };
 		464E206818EC735500C8F075 /* WazzaError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WazzaError.m; sourceTree = "<group>"; };
 		464E206A18EC756200C8F075 /* PurchaseDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseDelegate.h; sourceTree = "<group>"; };
-		464E206B18EC7E2E00C8F075 /* ItemDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemDelegate.h; sourceTree = "<group>"; };
 		465DC93318C0A8D6000B91D7 /* PersistenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceService.h; sourceTree = "<group>"; };
 		465DC93418C0A8D6000B91D7 /* PersistenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceService.m; sourceTree = "<group>"; };
 		465DC93D18C0BF04000B91D7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -260,7 +256,6 @@
 			children = (
 				CFC04BD0198296F200916803 /* Location */,
 				46120F4D190B3654009CA751 /* Sessions */,
-				464E205F18EC5E7800C8F075 /* Items */,
 				464E205918EC1EB100C8F075 /* Purchases */,
 				464E205818EC1E9000C8F075 /* LocalStorage */,
 				464E205718EC1E5E00C8F075 /* Network */,
@@ -329,16 +324,6 @@
 				464E205B18EC1EDE00C8F075 /* PurchaseService.m */,
 			);
 			name = Purchases;
-			sourceTree = "<group>";
-		};
-		464E205F18EC5E7800C8F075 /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				464E206118EC5E9300C8F075 /* ItemService.h */,
-				464E206218EC5E9300C8F075 /* ItemService.m */,
-				464E206B18EC7E2E00C8F075 /* ItemDelegate.h */,
-			);
-			name = Items;
 			sourceTree = "<group>";
 		};
 		464E206518EC732900C8F075 /* Error */ = {
@@ -453,7 +438,6 @@
 				464D623E18E9BA3600549CFC /* DeviceInfo.m in Sources */,
 				460F8E5218BD5B14003CCC12 /* NetworkService.m in Sources */,
 				46169CEE18E6418F008E745A /* SessionInfo.m in Sources */,
-				464E206318EC5E9300C8F075 /* ItemService.m in Sources */,
 				465DC98E18C48EB0000B91D7 /* HttpCodes.m in Sources */,
 				460F8E9C18BE45C3003CCC12 /* SecurityService.m in Sources */,
 				460F8E5518BD5B7F003CCC12 /* LocationInfo.m in Sources */,
