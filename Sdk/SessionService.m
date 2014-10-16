@@ -25,13 +25,14 @@
 
 @implementation SessionService
 
--(id)initService:(NSString *)companyName :(NSString *)applicationName {
+-(id)initService:(NSString *)companyName :(NSString *)applicationName :(NSString *)userId {
     
     self = [super init];
 
     if (self) {
         self.companyName = companyName;
         self.applicationName = applicationName;
+        self.userId = userId;
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
@@ -48,7 +49,7 @@
     if ([self anySessionStored]) {
         [self sendSessionDataToServer];
     } else {
-        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName];
+        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName :self.userId];
         [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
         [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
     }

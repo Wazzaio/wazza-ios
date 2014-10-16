@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Wazza. All rights reserved.
 //
 
-#import <UIKit/UIDevice.h>
 #import "SessionInfo.h"
 #import "DeviceInfo.h"
 #import "SecurityService.h"
@@ -20,11 +19,12 @@
 @implementation SessionInfo
 
 -(id)initSessionInfo:(NSString *)appName
-                    :(NSString *)companyName {
+                    :(NSString *)companyName
+                    :(NSString *)userId {
     self = [super init];
     
     if (self) {
-        self.userId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        self.userId = userId;
         self.applicationName = appName;
         self.companyName = companyName;
         self.startTime = [NSDate date];

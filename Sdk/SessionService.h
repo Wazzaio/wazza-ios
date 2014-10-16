@@ -15,8 +15,9 @@
 
 @property(nonatomic) NSString *companyName;
 @property(nonatomic) NSString *applicationName;
+@property(nonatomic) NSString *userId;
 
--(id)initService:(NSString *)companyName :(NSString *)applicationName;
+-(id)initService:(NSString *)companyName :(NSString *)applicationName :(NSString *)userId;
 
 -(BOOL)anySessionStored;
 

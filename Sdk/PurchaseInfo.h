@@ -26,11 +26,15 @@
 @property(nonatomic) NSInteger quantity;
 @property(nonatomic) NSString *sessionHash;
 
--(id)initWithData:(NSString *)name :(NSString *)itemId : (double)price;
+-(id)initWithData:(NSString *)name
+                 :(NSString *)itemId
+                 :(double)price
+                 :(NSString *)userId;
 
 -(id)initFromTransaction:(SKPaymentTransaction *)transaction
-                 appName:(NSString *)name
-               itemPrice: (double)price;
+                        :(NSString *)name
+                        :(double)price
+                        :(NSString *)userId;
 
 -(NSDictionary *)toJson;
 

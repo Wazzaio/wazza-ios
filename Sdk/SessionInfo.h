@@ -23,7 +23,8 @@
 @property(nonatomic, strong) NSMutableArray *purchases;
 
 -(id)initSessionInfo:(NSString *)appName
-                    :(NSString *)companyName;
+                    :(NSString *)companyName
+                    :(NSString *)userId;
 
 -(void)addPurchaseId:(NSString *)pId;
 

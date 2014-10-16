@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Wazza. All rights reserved.
 //
 
-#import <UIKit/UIDevice.h>
 #import <StoreKit/StoreKit.h>
 #import "PurchaseInfo.h"
 #import "LocationInfo.h"
@@ -28,7 +27,6 @@
     
     if (self) {
         self.time = [NSDate date];
-        self.userId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         self.location = Nil; //TODO
         self._id = generateID();
         self.deviceInfo = [[DeviceInfo alloc] initDeviceInfo];
@@ -36,21 +34,26 @@
     return self;
 }
 
--(id)initWithData:(NSString *)name :(NSString *)itemId : (double)price {
+-(id)initWithData:(NSString *)name
+                 :(NSString *)itemId
+                 :(double)price
+                 :(NSString *)userId {
     self = [self initCommon];
     
     if (self) {
         self.applicationName = name;
         self.itemId = itemId;
         self.price = price;
+        self.userId = userId;
     }
     
     return self;
 }
 
 -(id)initFromTransaction:(SKPaymentTransaction *)transaction
-                 appName:(NSString *)name
-               itemPrice: (double)price {
+                        :(NSString *)name
+                        : (double)price
+                        :(NSString *)userId {
     self = [self initCommon];
     
     if (self) {

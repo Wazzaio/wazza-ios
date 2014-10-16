@@ -25,6 +25,7 @@
 @property(nonatomic) NSString *companyName;
 @property(nonatomic) NSString *applicationName;
 @property(nonatomic) NSString *secret;
+@property(nonatomic) NSString *userId;
 @property(nonatomic, strong) NetworkService *networkService;
 @property(nonatomic, strong) SecurityService *securityService;
 @property(nonatomic, strong) PersistenceService *persistenceService;

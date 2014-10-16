@@ -7,6 +7,7 @@
 //
 
 #import "SDKCore.h"
+#import <UIKit/UIDevice.h>
 
 #define ITEMS_LIST @"ITEMS LIST"
 #define DETAILS @"DETAIILS"
@@ -39,12 +40,13 @@
     if(self) {
         self.companyName = companyName;
         self.applicationName = applicationName;
+        self.userId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         self.secret = secretKey;
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
-        self.purchaseService = [[PurchaseService alloc] initWithAppName:companyName :applicationName];
-        self.sessionService = [[SessionService alloc] initService:companyName :applicationName];
+        self.purchaseService = [[PurchaseService alloc] initWithAppName:companyName :applicationName :self.userId];
+        self.sessionService = [[SessionService alloc] initService:companyName :applicationName :self.userId];
         self.purchaseService.delegate = self;
         self.locationService = nil;
         [self bootstrap];
@@ -87,11 +89,13 @@
 #pragma Other stuff
 
 -(void)allowGeoLocation {
-
+    //TODO
 }
 
 -(void)setUserId:(NSString *)userId {
-
+    self.userId = userId;
+    self.sessionService.userId = userId;
+    self.purchaseService.userId = userId;
 }
 
 #pragma mark HTTP private methods

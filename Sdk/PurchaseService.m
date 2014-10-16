@@ -24,11 +24,12 @@
 
 @synthesize delegate;
 
--(id)initWithAppName:(NSString *)companyName :(NSString *)appName {
+-(id)initWithAppName:(NSString *)companyName :(NSString *)appName :(NSString *)userId {
     self = [super init];
     if (self) {
         self.companyName = companyName;
         self.appName = appName;
+        self.userId = userId;
         self.items = [[NSMutableArray alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
     }
@@ -100,8 +101,8 @@
     
     [self.persistenceService addContentToArray:transaction.payment.productIdentifier :PURCHASE_INFO];
     [self.delegate onPurchaseSuccess:
-     [[PurchaseInfo alloc] initFromTransaction:transaction appName:self.appName itemPrice:price]
-     ];
+     [[PurchaseInfo alloc] initFromTransaction:transaction :self.appName :price :self.userId]
+    ];
 }
 
 -(void)paymentQueue:(SKPaymentQueue *)queue
