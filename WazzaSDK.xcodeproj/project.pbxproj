@@ -42,8 +42,6 @@
 		464E206418EC697400C8F075 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464E205D18EC236E00C8F075 /* StoreKit.framework */; };
 		464E206918EC735500C8F075 /* WazzaError.m in Sources */ = {isa = PBXBuildFile; fileRef = 464E206818EC735500C8F075 /* WazzaError.m */; };
 		465DC93518C0A8D6000B91D7 /* PersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC93418C0A8D6000B91D7 /* PersistenceService.m */; };
-		465DC98518C0E53B000B91D7 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98418C0E53B000B91D7 /* Item.m */; };
-		465DC98818C0F75A000B91D7 /* ImageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98718C0F75A000B91D7 /* ImageInfo.m */; };
 		465DC98B18C0FA25000B91D7 /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98A18C0FA25000B91D7 /* Currency.m */; };
 		465DC98E18C48EB0000B91D7 /* HttpCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DC98D18C48EB0000B91D7 /* HttpCodes.m */; };
 		CF9DDB5E198702B000AAD524 /* WazzaAnalytics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 460F8E2118BD5A3E003CCC12 /* WazzaAnalytics.h */; };
@@ -119,10 +117,6 @@
 		465DC93318C0A8D6000B91D7 /* PersistenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceService.h; sourceTree = "<group>"; };
 		465DC93418C0A8D6000B91D7 /* PersistenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceService.m; sourceTree = "<group>"; };
 		465DC93D18C0BF04000B91D7 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		465DC98318C0E53B000B91D7 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		465DC98418C0E53B000B91D7 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
-		465DC98618C0F75A000B91D7 /* ImageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageInfo.h; sourceTree = "<group>"; };
-		465DC98718C0F75A000B91D7 /* ImageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageInfo.m; sourceTree = "<group>"; };
 		465DC98918C0FA25000B91D7 /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		465DC98A18C0FA25000B91D7 /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		465DC98C18C48EB0000B91D7 /* HttpCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpCodes.h; sourceTree = "<group>"; };
@@ -239,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				464E206518EC732900C8F075 /* Error */,
-				464D624118E9BA8C00549CFC /* Items */,
 				464D624018E9BA7300549CFC /* Purchase */,
 				460F8E5318BD5B7F003CCC12 /* LocationInfo.h */,
 				460F8E5418BD5B7F003CCC12 /* LocationInfo.m */,
@@ -281,17 +274,6 @@
 				460F8E4818BD5AEB003CCC12 /* PurchaseInfo.m */,
 			);
 			name = Purchase;
-			sourceTree = "<group>";
-		};
-		464D624118E9BA8C00549CFC /* Items */ = {
-			isa = PBXGroup;
-			children = (
-				465DC98318C0E53B000B91D7 /* Item.h */,
-				465DC98418C0E53B000B91D7 /* Item.m */,
-				465DC98618C0F75A000B91D7 /* ImageInfo.h */,
-				465DC98718C0F75A000B91D7 /* ImageInfo.m */,
-			);
-			name = Items;
 			sourceTree = "<group>";
 		};
 		464E205718EC1E5E00C8F075 /* Network */ = {
@@ -442,10 +424,8 @@
 				460F8E9C18BE45C3003CCC12 /* SecurityService.m in Sources */,
 				460F8E5518BD5B7F003CCC12 /* LocationInfo.m in Sources */,
 				464E205C18EC1EDE00C8F075 /* PurchaseService.m in Sources */,
-				465DC98818C0F75A000B91D7 /* ImageInfo.m in Sources */,
 				464E206918EC735500C8F075 /* WazzaError.m in Sources */,
 				CFFA094619F0151900EA21EC /* SDKCore.m in Sources */,
-				465DC98518C0E53B000B91D7 /* Item.m in Sources */,
 				465DC93518C0A8D6000B91D7 /* PersistenceService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

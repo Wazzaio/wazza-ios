@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Item.h"
 #import "SessionInfo.h"
 
 #define SESSION_INFO @"session_info"

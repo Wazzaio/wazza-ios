@@ -7,7 +7,6 @@
 //
 
 #import "PersistenceService.h"
-#import "Item.h"
 
 @implementation PersistenceService
 
@@ -77,94 +76,5 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
     }
 }
-
-//-(void)saveSessionInfo:(SessionInfo *)info {
-//    NSData *_savedData = [NSKeyedArchiver archivedDataWithRootObject:info];
-//    [[NSUserDefaults standardUserDefaults] setObject:_savedData forKey:SESSION_INFO];
-//}
-//
-//-(SessionInfo *)getSessionInfo {
-//    return [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:SESSION_INFO]];
-//}
-//
-//-(void)clearSession {
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:SESSION_INFO];
-//}
-
-
-//-(NSMutableArray *)getIdsList {
-//    NSData *ids = [[NSUserDefaults standardUserDefaults] objectForKey:LIST_OF_ITEMS_IDS];
-//    if (ids) {
-//        return [NSKeyedUnarchiver unarchiveObjectWithData:ids];
-//    } else {
-//        return nil;
-//    }
-//}
-
-//-(BOOL)existsInDatabase:(NSString *)itemId {
-//    BOOL exists = NO;
-//    NSArray *ids = [self getIdsList];
-//    if (ids == nil) {
-//        return exists;
-//    } else {
-//        exists = [ids containsObject:itemId];
-//    }
-//    
-//    return exists;
-//}
-
-//-(void)updateIdsList:(NSString *)_id {
-//    NSMutableArray *ids = [self getIdsList];
-//    [ids addObject:_id];
-//    NSData *updated = [NSKeyedArchiver archivedDataWithRootObject:ids];
-//    [[NSUserDefaults standardUserDefaults] setObject:updated forKey:LIST_OF_ITEMS_IDS];
-//}
-
-//-(Item *)getItem:(NSString *)itemId {
-//    
-//    if ([self existsInDatabase:itemId]) {
-//        return [NSKeyedUnarchiver unarchiveObjectWithData:[[NSUserDefaults standardUserDefaults] objectForKey:itemId]];
-//    } else {
-//        return nil;
-//    }
-//}
-
-//-(void)removeItem:(NSString *)itemName {
-//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:itemName];
-//}
-
-//-(NSArray *)getItems:(int)_offset {
-//    NSArray *ids = [self getIdsList];
-//    int offset = ([ids count] < _offset) ? [ids count]: _offset;
-//    NSArray *idsSubArray = [ids subarrayWithRange:NSMakeRange(0, offset)];
-//    NSMutableArray *items = [[NSMutableArray alloc] init];
-//    
-//    for (id itemId in idsSubArray) {
-//        [items addObject:[self getItem:itemId]];
-//    }
-//    
-//    return items;
-//}
-
-//-(void)createItemFromJson:(NSDictionary *)json {
-//
-//    Item *item = [[Item alloc] init];
-//    item._id = [[json valueForKey:@"metadata"] valueForKey:@"itemId"];
-//    item.name = [json valueForKey:@"name"];
-//    item.description = [json valueForKey:@"description"];
-//    
-//    NSString *imageName = [[json valueForKey:@"imageInfo"] valueForKey:@"name"];
-//    NSString *imageUrl = [[json valueForKey:@"imageInfo"] valueForKey:@"url"];
-//    item.image = [[ImageInfo alloc] initWithData:imageName :imageUrl];
-//    
-//    int currencyType = [[[json valueForKey:@"currency"] valueForKey:@"typeOf"] integerValue];
-//    double value = [[[json valueForKey:@"currency"] valueForKey:@"value"] doubleValue];
-//    NSString *currency = [[json valueForKey:@"currency"] valueForKey:@"virtualCurrency"];
-//    item.currency = [[Currency alloc] initWithData:currencyType :value :currency];
-//    
-//    NSData *_savedData = [NSKeyedArchiver archivedDataWithRootObject:item];
-//    [[NSUserDefaults standardUserDefaults] setObject:_savedData forKey:item._id];
-//    [self updateIdsList:item._id];
-//}
 
 @end
