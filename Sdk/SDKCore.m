@@ -73,15 +73,6 @@
 }
 
 -(void)makePurchase:(NSString *)item {
-    
-    //    SKProduct *i = nil;
-    //    for (SKProduct *p in self.skInfo) {
-    //        if (p.productIdentifier == item._id) {
-    //            i = p;
-    //            break;
-    //        }
-    //    }
-    
     [self.purchaseService purchaseItem:item];
 }
 
@@ -92,11 +83,11 @@
     //TODO
 }
 
--(void)setUserId:(NSString *)userId {
-    self.userId = userId;
-    self.sessionService.userId = userId;
-    self.purchaseService.userId = userId;
-}
+//-(void)setUserId:(NSString *)_id {
+//    self.userId = _id;
+//    self.sessionService.userId = _id;
+//    self.purchaseService.userId = _id;
+//}
 
 #pragma mark HTTP private methods
 
@@ -142,9 +133,10 @@
 
 -(void)onPurchaseSuccess:(PurchaseInfo *)purchaseInfo {
     purchaseInfo.sessionHash = [self.sessionService getCurrentSessionHash];
+    [self.sessionService addPurchasesToCurrentSession:purchaseInfo._id];
     NSDictionary *json = [purchaseInfo toJson];
     
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@", URL, ENDPOINT_PURCHASE];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_PURCHASE, self.companyName, self.applicationName];
     NSString *content = [self createStringFromJSON:json];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;

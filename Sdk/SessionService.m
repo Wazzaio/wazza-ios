@@ -78,21 +78,27 @@
 
 #pragma mark HTTP private methods
 
--(int)addPurchasesToCurrentSession {
-    NSMutableArray *purchases = [self.persistenceService getArrayContent:PURCHASE_INFO];
-    if (purchases != NULL) {
-        self.currentSession.purchases = purchases;
-        return (int)[purchases count];
-    } else return  -1;
+-(void)addPurchasesToCurrentSession:(NSString *)purchaseId {
+    SessionInfo *session = [self getCurrentSession];
+    [session addPurchaseId:purchaseId];
+    self.currentSession = session;
+    [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
+    NSMutableArray *savedSessions = [self.persistenceService getArrayContent:SESSION_INFO];
+    NSMutableArray *newSessions = [[NSMutableArray alloc] init];
+    for (__strong SessionInfo *s in savedSessions) {
+        if ([s.sessionHash isEqualToString:self.currentSession.sessionHash]) {
+            [newSessions addObject:self.currentSession];
+        } else {
+            [newSessions addObject:s];
+        }
+    }
+    [self.persistenceService storeContent:newSessions :SESSION_INFO];
 }
 
 -(void)sendSessionDataToServer {
     NSMutableArray *sessions = [[NSMutableArray alloc] init];
     NSMutableArray *_saved = [self.persistenceService getArrayContent:SESSION_INFO];
     for(__strong SessionInfo* s in _saved) {
-        if ([self.currentSession.startTime compare:s.startTime] == NSOrderedSame) {
-            s = ([self addPurchasesToCurrentSession] > 0)? self.currentSession : s;
-        }
         [s setEndDate];
         [sessions addObject:[s toJson]];
     }

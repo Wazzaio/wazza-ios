@@ -77,13 +77,13 @@ static id<WazzaDelegate> _delegate = nil;
     }
 }
 
-+(void)setUserId:(NSString *)userId {
-    if (_core == nil) {
-        
-    } else {
-        [_core setUserId:userId];
-    }
-}
+//+(void)setUserId:(NSString *)userId {
+//    if (_core == nil) {
+//        
+//    } else {
+//        [_core setUserId:userId];
+//    }
+//}
 
 +(void)setDelegate:(id)delegate {
     _delegate = delegate;

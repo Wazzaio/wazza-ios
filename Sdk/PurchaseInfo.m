@@ -71,7 +71,7 @@
 
 -(NSString *)dateToString {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"EEE, dd MMM yyyy HH:mm:ss ZZZ";
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss Z";
     return[formatter stringFromDate:self.time];
 }
 
@@ -87,7 +87,7 @@
     [json setObject:[[NSNumber alloc] initWithDouble:self.price] forKey:@"price"];
     [json setObject:time forKey:@"time"];
     [json setObject:[self.deviceInfo toJson] forKey:@"deviceInfo"];
-    [json setObject:self.sessionHash forKey:@"sessionHash"];
+    [json setObject:self.sessionHash forKey:@"sessionId"];
     
     return json;
 }

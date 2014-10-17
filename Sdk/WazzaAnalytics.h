@@ -32,7 +32,7 @@
 
 +(void)allowGeoLocation;
 
-+(void)setUserId:(NSString *)userId;
+//+(void)setUserId:(NSString *)userId;
 
 +(void)setDelegate:(id)delegate;
 

@@ -31,4 +31,6 @@
 
 -(SessionInfo *)getCurrentSession;
 
+-(void)addPurchasesToCurrentSession:(NSString *)purchaseId;
+
 @end
