@@ -1,6 +1,5 @@
 //
-//  SDK.h
-//  SDK
+//  WazzaAnalytics.h
 //
 //  Created by Joao Vasques on 18/02/14.
 //  Copyright (c) 2014 Wazza. All rights reserved.

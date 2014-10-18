@@ -1,5 +1,5 @@
 //
-//  SDK.m
+//  WazzaAnalytics.m
 //  SDK
 //
 //  Created by Joao Vasques on 25/02/14.
