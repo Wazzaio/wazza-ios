@@ -99,7 +99,6 @@
         }
     }
     
-    [self.persistenceService addContentToArray:transaction.payment.productIdentifier :PURCHASE_INFO];
     [self.delegate onPurchaseSuccess:
      [[PurchaseInfo alloc] initFromTransaction:transaction :self.appName :price :self.userId]
     ];
