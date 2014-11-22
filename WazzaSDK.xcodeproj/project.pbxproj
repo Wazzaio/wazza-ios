@@ -190,14 +190,12 @@
 		460F8E1E18BD5A3E003CCC12 /* Sdk */ = {
 			isa = PBXGroup;
 			children = (
+				CFD169EB1A212FCE001C8E9A /* core */,
 				460F8E4318BD5A9E003CCC12 /* services */,
 				460F8E4218BD5A98003CCC12 /* models */,
 				460F8E2118BD5A3E003CCC12 /* WazzaAnalytics.h */,
 				460F8E2318BD5A3E003CCC12 /* WazzaAnalytics.m */,
 				460A01C218ECDCCC00657CEE /* WazzaDelegate.h */,
-				CFFA094419F0151900EA21EC /* SDKCore.h */,
-				CFFA094519F0151900EA21EC /* SDKCore.m */,
-				CFFA094719F01ACB00EA21EC /* SDKCoreDelegate.h */,
 				460F8E1F18BD5A3E003CCC12 /* Supporting Files */,
 			);
 			path = Sdk;
@@ -232,14 +230,11 @@
 		460F8E4218BD5A98003CCC12 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				CFD169EA1A212FB2001C8E9A /* Device */,
+				CFD169E91A212FA2001C8E9A /* Session */,
+				CFD169E81A212F90001C8E9A /* Location */,
 				464E206518EC732900C8F075 /* Error */,
 				464D624018E9BA7300549CFC /* Purchase */,
-				460F8E5318BD5B7F003CCC12 /* LocationInfo.h */,
-				460F8E5418BD5B7F003CCC12 /* LocationInfo.m */,
-				46169CEC18E6418F008E745A /* SessionInfo.h */,
-				46169CED18E6418F008E745A /* SessionInfo.m */,
-				464D623C18E9BA3600549CFC /* DeviceInfo.h */,
-				464D623D18E9BA3600549CFC /* DeviceInfo.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -324,6 +319,43 @@
 				CFC04BD21982970900916803 /* LocationService.m */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		CFD169E81A212F90001C8E9A /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				460F8E5318BD5B7F003CCC12 /* LocationInfo.h */,
+				460F8E5418BD5B7F003CCC12 /* LocationInfo.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		CFD169E91A212FA2001C8E9A /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				46169CEC18E6418F008E745A /* SessionInfo.h */,
+				46169CED18E6418F008E745A /* SessionInfo.m */,
+			);
+			name = Session;
+			sourceTree = "<group>";
+		};
+		CFD169EA1A212FB2001C8E9A /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				464D623C18E9BA3600549CFC /* DeviceInfo.h */,
+				464D623D18E9BA3600549CFC /* DeviceInfo.m */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		CFD169EB1A212FCE001C8E9A /* core */ = {
+			isa = PBXGroup;
+			children = (
+				CFFA094419F0151900EA21EC /* SDKCore.h */,
+				CFFA094519F0151900EA21EC /* SDKCore.m */,
+				CFFA094719F01ACB00EA21EC /* SDKCoreDelegate.h */,
+			);
+			name = core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
