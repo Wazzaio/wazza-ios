@@ -11,9 +11,7 @@
 
 @interface WazzaAnalytics : NSObject
 
-+(void)initWithCredentials:(NSString *)companyName
-                        :(NSString *)applicationName
-                        :(NSString *)secretKey;
++(void)initWithSecret:(NSString *)secretToken;
 
 #pragma Session functions
 

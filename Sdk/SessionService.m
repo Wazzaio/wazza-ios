@@ -48,7 +48,7 @@
     if ([self anySessionStored]) {
         [self sendSessionDataToServer];
     } else {
-        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.token :self.userId];
+        self.currentSession = [[SessionInfo alloc] initSessionInfo :self.userId];
         [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
         [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
     }

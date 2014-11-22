@@ -20,13 +20,11 @@ static id<WazzaDelegate> _delegate = nil;
 
 @implementation WazzaAnalytics
 
-+(void)initWithCredentials:(NSString *)companyName
-                        :(NSString *)applicationName
-                        :(NSString *)secretKey {
++(void)initWithSecret:(NSString *)secretToken {
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _core = [[SDKCore alloc] initCore:secretKey];
+        _core = [[SDKCore alloc] initCore:secretToken];
         _core.delegate = [WazzaAnalytics class];
     });
 }
