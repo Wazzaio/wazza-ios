@@ -18,15 +18,11 @@
 
 @implementation SessionInfo
 
--(id)initSessionInfo:(NSString *)appName
-                    :(NSString *)companyName
-                    :(NSString *)userId {
+-(id)initSessionInfo:(NSString *)userId {
     self = [super init];
     
     if (self) {
         self.userId = userId;
-        self.applicationName = appName;
-        self.companyName = companyName;
         self.startTime = [NSDate date];
         self.endTime = [NSDate date];
         self.location = nil;
@@ -49,8 +45,6 @@
 
 -(NSString *)generateHash {
     NSMutableDictionary *j = [[NSMutableDictionary alloc] init];
-    [j setObject:self.companyName forKey:@"companyName"];
-    [j setObject:self.applicationName forKey:@"appName"];
     [j setObject:self.userId forKey:@"userId"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
@@ -72,8 +66,6 @@
 -(NSDictionary *)toJson {
     NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
     [json setObject:self.userId forKey:@"userId"];
-    [json setObject:self.applicationName forKey:@"applicationName"];
-    [json setObject:self.companyName forKey:@"companyName"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
     [json setObject:[dateFormatter stringFromDate:self.startTime] forKey:@"startTime"];
@@ -108,8 +100,6 @@
 
     self.userId = [decoder decodeObjectForKey:@"userId"];
     self.sessionHash = [decoder decodeObjectForKey:@"sessionHash"];
-    self.applicationName = [decoder decodeObjectForKey:@"applicationName"];
-    self.companyName = [decoder decodeObjectForKey:@"companyName"];
     self.startTime = [decoder decodeObjectForKey:@"startTime"];
     self.endTime = [decoder decodeObjectForKey:@"endTime"];
     self.device = [decoder decodeObjectForKey:@"device"];
@@ -122,8 +112,6 @@
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:self.userId forKey:@"userId"];
     [encoder encodeObject:self.sessionHash forKey:@"sessionHash"];
-    [encoder encodeObject:self.applicationName forKey:@"applicationName"];
-    [encoder encodeObject:self.companyName forKey:@"companyName"];
     [encoder encodeObject:self.startTime forKey:@"startTime"];
     [encoder encodeObject:self.endTime forKey:@"endTime"];
     [encoder encodeObject:self.device forKey:@"device"];

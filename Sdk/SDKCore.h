@@ -22,8 +22,6 @@
 @interface SDKCore : NSObject
 
 @property (nonatomic, weak) id<SDKCoreDelegate> delegate;
-@property(nonatomic) NSString *companyName;
-@property(nonatomic) NSString *applicationName;
 @property(nonatomic) NSString *secret;
 @property(nonatomic) NSString *userId;
 @property(nonatomic, strong) NetworkService *networkService;
@@ -34,10 +32,7 @@
 @property(nonatomic, strong) LocationService *locationService;
 @property(nonatomic, strong) NSArray *skInfo;
 
--(id)initCore:(NSString *)companyName
-             :(NSString *)applicationName
-             :(NSString *)secretKey;
-
+-(id)initCore:(NSString *)secretKey;
 
 -(void)newSession;
 

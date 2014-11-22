@@ -13,11 +13,10 @@
 
 @interface SessionService : NSObject
 
-@property(nonatomic) NSString *companyName;
-@property(nonatomic) NSString *applicationName;
+@property(nonatomic) NSString *token;
 @property(nonatomic) NSString *userId;
 
--(id)initService:(NSString *)companyName :(NSString *)applicationName :(NSString *)userId;
+-(id)initService :(NSString *)userId :(NSString *)token;
 
 -(BOOL)anySessionStored;
 

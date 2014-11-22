@@ -14,17 +14,14 @@
 
 @property(nonatomic, strong) NSString *userId;
 @property(nonatomic, strong) NSString *sessionHash;
-@property(nonatomic, strong) NSString *applicationName;
-@property(nonatomic, strong) NSString *companyName;
+@property(nonatomic, strong) NSString *token;
 @property(nonatomic) NSDate *startTime;
 @property(nonatomic) NSDate *endTime;
 @property(nonatomic, strong) LocationInfo *location;
 @property(nonatomic, strong) DeviceInfo *device;
 @property(nonatomic, strong) NSMutableArray *purchases;
 
--(id)initSessionInfo:(NSString *)appName
-                    :(NSString *)companyName
-                    :(NSString *)userId;
+-(id)initSessionInfo:(NSString *)userId;
 
 -(void)addPurchaseId:(NSString *)pId;
 

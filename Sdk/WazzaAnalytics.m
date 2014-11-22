@@ -26,7 +26,7 @@ static id<WazzaDelegate> _delegate = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _core = [[SDKCore alloc] initCore:companyName :applicationName :secretKey];
+        _core = [[SDKCore alloc] initCore:secretKey];
         _core.delegate = [WazzaAnalytics class];
     });
 }

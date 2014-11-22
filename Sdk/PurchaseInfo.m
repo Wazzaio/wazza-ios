@@ -21,7 +21,7 @@
      **/
     NSString*(^generateID)(void) = ^NSString* {
         SecurityService *securityService = [[SecurityService alloc] init];
-        NSString *idValue = [[NSString alloc] initWithFormat:@"%@-%@-%@-%@", self.applicationName, self.itemId, [self dateToString], @""];
+        NSString *idValue = [[NSString alloc] initWithFormat:@"%@-%@-%@", self.itemId, [self dateToString], @""];
         return [securityService hashContent:idValue];
     };
     
@@ -34,14 +34,12 @@
     return self;
 }
 
--(id)initWithData:(NSString *)name
-                 :(NSString *)itemId
+-(id)initWithData:(NSString *)itemId
                  :(double)price
                  :(NSString *)userId {
     self = [self initCommon];
     
     if (self) {
-        self.applicationName = name;
         self.itemId = itemId;
         self.price = price;
         self.userId = userId;
@@ -51,13 +49,11 @@
 }
 
 -(id)initFromTransaction:(SKPaymentTransaction *)transaction
-                        :(NSString *)name
                         : (double)price
                         :(NSString *)userId {
     self = [self initCommon];
     
     if (self) {
-        self.applicationName = name;
         self.itemId = transaction.payment.productIdentifier;
         self.price = price;
         self.time = transaction.transactionDate;
@@ -82,7 +78,6 @@
     
     [json setObject:self._id forKey:@"id"];
     [json setObject:self.userId forKey:@"userId"];
-    [json setObject:self.applicationName forKey:@"name"];
     [json setObject:self.itemId forKey:@"itemId"];
     [json setObject:[[NSNumber alloc] initWithDouble:self.price] forKey:@"price"];
     [json setObject:time forKey:@"time"];

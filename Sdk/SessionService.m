@@ -25,14 +25,13 @@
 
 @implementation SessionService
 
--(id)initService:(NSString *)companyName :(NSString *)applicationName :(NSString *)userId {
+-(id)initService:(NSString *)userId :(NSString *)token {
     
     self = [super init];
 
     if (self) {
-        self.companyName = companyName;
-        self.applicationName = applicationName;
         self.userId = userId;
+        self.token = token;
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
@@ -49,7 +48,7 @@
     if ([self anySessionStored]) {
         [self sendSessionDataToServer];
     } else {
-        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.applicationName : self.companyName :self.userId];
+        self.currentSession = [[SessionInfo alloc] initSessionInfo:self.token :self.userId];
         [self.persistenceService addContentToArray:self.currentSession :SESSION_INFO];
         [self.persistenceService storeContent:self.currentSession :CURRENT_SESSION];
     }
@@ -104,7 +103,7 @@
     }
     
     NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:sessions, @"session", nil];
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_SESSION_NEW, self.companyName, self.applicationName];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/", URL, ENDPOINT_SESSION_NEW];
     NSString *content = [self createStringFromJSON:dic];
     NSDictionary *headers = [self addSecurityInformation:content];
     NSDictionary *params = nil;
@@ -151,11 +150,7 @@
 }
 
 -(NSDictionary *)addSecurityInformation:(NSString *)content {
-    NSMutableDictionary *securityHeaders = [NSMutableDictionary dictionaryWithObjectsAndKeys:[self applicationName],@"AppName", nil];
-    
-    if (content) {
-        [securityHeaders setValue:[self.securityService hashContent:content] forKey:@"Digest"];
-    }
+    NSMutableDictionary *securityHeaders = [NSMutableDictionary dictionaryWithObjectsAndKeys:[self token], @"SDK-TOKEN", nil];
     return securityHeaders;
 }
 

@@ -31,22 +31,18 @@
 
 @synthesize delegate;
 
--(id)initCore:(NSString *)companyName
-             :(NSString *)applicationName
-             :(NSString *)secretKey {
+-(id)initCore:(NSString *)token {
 
     self = [super init];
     
     if(self) {
-        self.companyName = companyName;
-        self.applicationName = applicationName;
         self.userId = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        self.secret = secretKey;
+        self.secret = token;
         self.networkService = [[NetworkService alloc] init];
         self.securityService = [[SecurityService alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
-        self.purchaseService = [[PurchaseService alloc] initWithAppName:companyName :applicationName :self.userId];
-        self.sessionService = [[SessionService alloc] initService:companyName :applicationName :self.userId];
+        self.purchaseService = [[PurchaseService alloc] initService :self.userId];
+        self.sessionService = [[SessionService alloc] initService :self.userId :token];
         self.purchaseService.delegate = self;
         self.locationService = nil;
         [self bootstrap];
@@ -113,12 +109,8 @@
     return requestData;
 }
 
--(NSDictionary *)addSecurityInformation:(NSString *)content {
-    NSMutableDictionary *securityHeaders = [NSMutableDictionary dictionaryWithObjectsAndKeys:[self applicationName],@"AppName", nil];
-    
-    if (content) {
-        [securityHeaders setValue:[self.securityService hashContent:content] forKey:@"Digest"];
-    }
+-(NSDictionary *)addSecurityInformation {
+    NSMutableDictionary *securityHeaders = [NSMutableDictionary dictionaryWithObjectsAndKeys:[self secret], @"SDK-TOKEN", nil];
     return securityHeaders;
 }
 
@@ -136,9 +128,9 @@
     [self.sessionService addPurchasesToCurrentSession:purchaseInfo._id];
     NSDictionary *json = [purchaseInfo toJson];
     
-    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/%@/%@", URL, ENDPOINT_PURCHASE, self.companyName, self.applicationName];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@/", URL, ENDPOINT_PURCHASE];
     NSString *content = [self createStringFromJSON:json];
-    NSDictionary *headers = [self addSecurityInformation:content];
+    NSDictionary *headers = [self addSecurityInformation];
     NSDictionary *params = nil;
     NSData *requestData = [self createContentForHttpPost:content :requestUrl];
     

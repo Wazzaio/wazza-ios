@@ -10,6 +10,7 @@
 
 #define HTTP_GET @"GET"
 #define HTTP_POST @"POST"
+#define URL @"http://192.168.1.65:9000/api/"
 
 typedef void (^OnSuccess)(NSArray *);
 typedef void (^OnFailure)(NSError *);

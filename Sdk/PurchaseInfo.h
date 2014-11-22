@@ -15,7 +15,6 @@
 
 @property(nonatomic) NSString *_id;
 @property(nonatomic) NSString *userId;
-@property(nonatomic) NSString *applicationName;
 @property(nonatomic) NSString *itemId;
 @property(nonatomic) double price;
 @property(nonatomic) NSDate *time;
@@ -32,7 +31,6 @@
                  :(NSString *)userId;
 
 -(id)initFromTransaction:(SKPaymentTransaction *)transaction
-                        :(NSString *)name
                         :(double)price
                         :(NSString *)userId;
 

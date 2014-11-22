@@ -24,11 +24,9 @@
 
 @synthesize delegate;
 
--(id)initWithAppName:(NSString *)companyName :(NSString *)appName :(NSString *)userId {
+-(id)initService:(NSString *)userId {
     self = [super init];
     if (self) {
-        self.companyName = companyName;
-        self.appName = appName;
         self.userId = userId;
         self.items = [[NSMutableArray alloc] init];
         self.persistenceService = [[PersistenceService alloc] initPersistence];
@@ -100,7 +98,7 @@
     }
     
     [self.delegate onPurchaseSuccess:
-     [[PurchaseInfo alloc] initFromTransaction:transaction :self.appName :price :self.userId]
+     [[PurchaseInfo alloc] initFromTransaction:transaction :price :self.userId]
     ];
 }
 
