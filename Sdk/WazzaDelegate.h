@@ -9,11 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "PurchaseInfo.h"
 
+/**
+ *  Wazza delegate protocol
+ */
 @protocol WazzaDelegate <NSObject>
 
+/**
+ *  Protocol method that's called if a purchase request is successful
+ */
 @required
 -(void)purchaseSuccess:(PurchaseInfo *)info;
 
+/**
+ *  Protocol method that's called if there was a problem with a purchase request
+ */
 @required
 -(void)PurchaseFailure:(NSError *)error;
 
