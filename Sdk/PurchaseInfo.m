@@ -21,7 +21,7 @@
      **/
     NSString*(^generateID)(void) = ^NSString* {
         SecurityService *securityService = [[SecurityService alloc] init];
-        NSString *idValue = [[NSString alloc] initWithFormat:@"%@-%@-%@", self.itemId, [self dateToString], @""];
+        NSString *idValue = [[NSString alloc] initWithFormat:@"%@-%@", self.itemId, [self dateToString]];
         return [securityService hashContent:idValue];
     };
     

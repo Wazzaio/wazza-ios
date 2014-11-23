@@ -63,7 +63,11 @@
     BOOL res = false;
     id content = [self getContent:key];
     if (content != NULL) {
-        if([(NSMutableArray *)content count] > 0) {
+        if ([content isKindOfClass:[NSMutableArray class]]) {
+            if([(NSMutableArray *)content count] > 0) {
+                res = true;
+            }
+        } else {
             res = true;
         }
     }

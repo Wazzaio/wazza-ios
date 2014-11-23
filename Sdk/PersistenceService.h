@@ -14,13 +14,8 @@
 
 @interface PersistenceService : NSObject
 
--(id)initPersistence;
 
-//-(void)saveSessionInfo:(SessionInfo *)info;
-//
-//-(SessionInfo *)getSessionInfo;
-//
-//-(void)clearSession;
+-(id)initPersistence;
 
 -(void)storeContent:(id)content :(NSString *)key;
 
@@ -33,13 +28,5 @@
 -(BOOL)contentExists:(NSString *)key;
 
 -(void)clearContent:(NSString *)key;
-
-//-(void)createItemFromJson:(NSDictionary *)json;
-//
-//-(Item *)getItem:(NSString *)name;
-//
-//-(void)removeItem:(NSString *)itemId;
-//
-//-(NSArray *)getItems:(int)offset;
 
 @end

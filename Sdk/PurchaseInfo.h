@@ -25,8 +25,7 @@
 @property(nonatomic) NSInteger quantity;
 @property(nonatomic) NSString *sessionHash;
 
--(id)initWithData:(NSString *)name
-                 :(NSString *)itemId
+-(id)initWithData:(NSString *)itemId
                  :(double)price
                  :(NSString *)userId;
 
